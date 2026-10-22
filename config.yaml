@@ -1,0 +1,179 @@
+# Kontoret och restaurangerna sajten visar.
+# Forka repot och byt ut allt i den här filen för att sätta upp sajten för ditt kontor.
+# Avstånd räknas fågelvägen från office.lat/lon till varje restaurangs lat/lon.
+
+office:
+  name: Consid
+  address: Stortorget 29, Malmö
+  lat: 55.6056
+  lon: 13.0003
+  radius_m: 500
+walk_speed_m_per_min: 80
+restaurants:
+- id: piccolo
+  name: Piccolo Mondo
+  address: Lilla torg 2, Malmö
+  lat: 55.6055
+  lon: 12.9992
+  hours: Opens 11:30
+- id: victors
+  name: Victors
+  address: Lilla torg 1, Malmö
+  lat: 55.60539
+  lon: 12.99836
+  hours: Opens 11:00
+  includes: Bread, salad and coffee refills included
+- id: steakhouse
+  name: Steakhouse
+  address: Lilla torg 7, Malmö
+  lat: 55.60494
+  lon: 12.99846
+  hours: Opens 11:30
+- id: kramer
+  name: Kramer Gastronomi & Bar
+  address: Stortorget 7, Malmö
+  lat: 55.60685
+  lon: 12.99962
+  hours: Lunch 11:30–13:30
+- id: osaka
+  name: Osaka
+  address: Larochegatan 7, Malmö
+  lat: 55.60487
+  lon: 12.99794
+  hours: Mon–Fri 11:00–15:00
+  includes: Drink, miso soup and green tea included
+- id: ruths
+  name: Ruths
+  address: Mäster Johansgatan 11, Malmö
+  lat: 55.6061
+  lon: 12.9977
+  hours: Mon–Sat 12:00–14:30
+  includes: Sourdough bread and coffee included
+- id: namu
+  name: Namu
+  address: Landbygatan 5, Malmö
+  lat: 55.60521
+  lon: 12.99752
+  hours: Tue–Fri 11:30–14:00
+  includes: Coffee included
+- id: mjs
+  name: MJ's
+  address: Mäster Johansgatan 13, Malmö
+  lat: 55.6062
+  lon: 12.9975
+  hours: Mon–Fri 11:30–14:00
+  includes: Salad, bread, coffee and cake included
+- id: sture
+  name: Sture
+  address: Adelgatan 13, Malmö
+  lat: 55.60736
+  lon: 13.00044
+  hours: Mon–Fri 11:30–15:30
+- id: kol
+  name: KOL & Cocktails
+  address: Kalendegatan 16, Malmö
+  lat: 55.60499
+  lon: 13.00325
+  hours: Mon–Fri 11:30–14:00
+  includes: Salad, bread and coffee included
+- id: spoonery
+  name: Spoonery Gamla Väster
+  address: Västergatan 11, Malmö
+  lat: 55.60667
+  lon: 12.99705
+  hours: Daily 11:30–21:00
+  includes: Soups and stews; bread, butter and coffee included
+- id: gustavadolf
+  name: Gustav Adolf
+  address: Gustav Adolfs torg 43, Malmö
+  lat: 55.60332
+  lon: 13.00061
+  hours: Mon–Fri 11:00–15:00
+  includes: Salad, bread and coffee included
+- id: masala
+  name: Masala Kitchen & Bar
+  address: Norra Vallgatan 78, Malmö
+  lat: 55.60695
+  lon: 12.99696
+  hours: Mon–Fri 11:00–14:00
+  includes: Naan, salad and water included
+  menu_source: https://masalakitchen.se/lunch/
+  note: Indian; drop-in only at lunch
+- id: sushiyama
+  name: Sushi Yama Hansa
+  address: Malmborgsgatan 1, Malmö
+  lat: 55.60328
+  lon: 13.00309
+  hours: Daily from 10:00
+- id: rosegarden
+  name: Rosegarden
+  address: Stora Nygatan 59, Malmö
+  lat: 55.603
+  lon: 12.99749
+  hours: Mon–Fri 11:30–15:00
+  includes: Soft drinks, coffee and tea included
+- id: bistroroyal
+  name: Bistro Royal
+  address: Centralplan 8 (Malmö C), Malmö
+  lat: 55.60879
+  lon: 13.00085
+  hours: Mon–Fri 11:00–15:00
+  includes: Ice water included; takeaway 10 kr less
+- id: tipico
+  name: Tipico
+  address: Lilla Nygatan 11, Malmö
+  lat: 55.6024
+  lon: 13.00205
+  hours: Mon–Fri 11:30–14:00
+- id: benne
+  name: benne
+  address: Malmborgsgatan 6, Malmö
+  lat: 55.6029
+  lon: 13.0039
+  hours: Mon–Thu 11:00–20:00, Fri 11:00–21:00
+  includes: No lunch deal published
+  menu_source: https://bennepastabar.se/
+  favourite: true
+- id: dazio
+  name: Da Zio
+  address: Stora Nygatan 44, Malmö
+  lat: 55.60368
+  lon: 13.0053
+  hours: Opens 11:00
+- id: ostergatan25
+  name: Östergatan No. 25
+  address: Östergatan 25, Malmö
+  lat: 55.60778
+  lon: 13.00506
+  hours: Mon–Fri 11:30–14:00
+  includes: Salad buffet and coffee included
+- id: vibliotek
+  name: Vibliotek
+  address: Södra Vallgatan 3, Malmö
+  lat: 55.60145
+  lon: 13.00126
+  hours: Lunch 11:30–14:30
+  includes: Salad, bread and coffee included
+- id: tugg
+  name: Tugg Burgers
+  address: Södra Vallgatan 3, Malmö
+  lat: 55.60145
+  lon: 13.00126
+  hours: 11:00–15:00
+  includes: Fries, coffee and water included
+- id: edda
+  name: Edda
+  address: Erik Dahlbergsgatan 5, Malmö
+  lat: 55.59869
+  lon: 12.99759
+  hours: Tue–Sat (lunch hours not published)
+  menu_source: https://www.instagram.com/eddamalmo
+  note: Lunch menu is posted on Instagram only
+- id: saltimporten-canteen
+  name: saltimporten canteen
+  address: Grimsbygatan 24, Malmö
+  lat: 55.61611
+  lon: 12.99699
+  hours: Mon–Fri 11:00–14:00
+  menu_source: https://www.saltimporten.com/
+  favourite: true

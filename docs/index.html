@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dagens lunch</title>
+<meta name="description" content="Today's lunch menus near the office, updated every weekday morning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow" id="dateline">Today</div>
+      <h1>Dagens lunch</h1>
+      <p class="sub" id="subline">Lunch spots near the office.</p>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+
+  <div class="controls" role="toolbar" aria-label="Filter menus">
+    <button class="chip" data-kind="veg" aria-pressed="false"><span class="dot k-veg"></span>Vegetarian</button>
+    <button class="chip" data-kind="fish" aria-pressed="false"><span class="dot k-fish"></span>Fish</button>
+    <button class="chip" data-kind="meat" aria-pressed="false"><span class="dot k-meat"></span>Meat</button>
+    <button class="chip" data-kind="buffet" aria-pressed="false"><span class="dot k-buffet"></span>Buffet</button>
+    <span class="spacer"></span>
+    <div class="seg" role="group" aria-label="Sort">
+      <button data-sort="dist" aria-pressed="true">Closest</button>
+      <button data-sort="price" aria-pressed="false">Cheapest</button>
+    </div>
+    <input type="search" id="q" placeholder="Search dishes…" aria-label="Search dishes">
+  </div>
+
+  <main id="list"><div class="empty">Loading today’s menus…</div></main>
+
+  <details class="nomenu" id="nomenuBox" hidden>
+    <summary id="nomenuSum">No menu online</summary>
+    <p class="muted" style="margin:8px 0 0">These serve lunch nearby but don’t publish a daily menu anywhere we can read.</p>
+    <div class="nlist" id="nlist"></div>
+  </details>
+
+  <div class="legend">
+    <span><i class="dot k-meat"></i>Meat</span><span><i class="dot k-fish"></i>Fish</span><span><i class="dot k-veg"></i>Vegetarian</span><span><i class="dot k-buffet"></i>Buffet</span><span><i class="dot"></i>Other / always on the menu</span>
+    <span id="distnote"></span>
+  </div>
+  <footer>Open source — <a href="https://github.com/LelleWipp/dagens-lunch">set this up for your office</a>.</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

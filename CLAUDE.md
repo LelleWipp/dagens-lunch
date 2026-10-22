@@ -17,6 +17,49 @@ vardagsmorgon. Ingen server, ingen databas, ingen kostnad.
 Första installationen är Consid Malmö (Stortorget 29), men ingenting i koden får vara
 specifikt för den.
 
+## Utgångsläge
+
+Projektet bygger vidare på en fungerande prototyp: en lunchsida för Consid Malmö som
+kördes som Claude-artefakt, där menyerna samlades in varje vardagsmorgon och lagrades i
+artefaktens databas. Den är nu portad hit:
+
+- `docs/` är prototypens frontend (design, filter, sortering), omskriven att läsa
+  `docs/data/menus.json` istället för en databas. Röstning och förslag är borttagna (v1-scope).
+- `config.yaml` innehåller prototypens 24 restauranger med koordinater. Kontorets
+  koordinater är återberäknade från prototypens sparade avstånd (avvikelse < 1 m).
+- `docs/data/menus.json` är prototypens senaste insamlade meny (2026-10-22), så sajten
+  har innehåll innan scrapern finns.
+
+**Nästa steg:** `scraper/` som ersätter prototypens manuella insamling och skriver samma
+JSON-format.
+
+## JSON-kontraktet (`docs/data/menus.json`)
+
+```jsonc
+{
+  "date": "2026-10-22",                    // menyns datum, YYYY-MM-DD
+  "updated_at": "2026-10-22T10:01:00+02:00",
+  "office": { "name": "...", "address": "...", "radius_m": 500 },
+  "walk_speed_m_per_min": 80,
+  "restaurants": [                          // från config.yaml + beräknat distance_m
+    { "id": "osaka", "name": "Osaka", "address": "...", "distance_m": 169,
+      "hours": "...", "includes": "...", "menu_source": "https://...",
+      "favourite": true, "note": "..." }    // alla utom id, name, distance_m är valfria
+  ],
+  "items": {                                // en post per restaurang-id
+    "osaka": {
+      "status": "today",                    // today | standing | link | none | error
+      "dishes": [ { "name": "...", "desc": "...", "kind": "meat|fish|veg|buffet|other", "price": 128 } ],
+      "note": "...", "source": "https://..."
+    }
+  }
+}
+```
+
+`today` = dagens daterade meny, `standing` = samma rätter varje dag, `link` = menyn finns
+bara via länk (t.ex. Instagram), `none` = ingen meny hittad, `error` = källan gick sönder.
+Varje körning sparar även en kopia i `docs/data/archive/<datum>.json`.
+
 ## Teknikstack
 
 | Del | Val | Varför |
@@ -98,9 +141,10 @@ python -m http.server -d docs # förhandsgranska sajten på localhost:8000
 
 ## Definition of done för v1
 
-- [ ] `config.yaml` med minst 10 restauranger kring Stortorget 29
+- [x] `config.yaml` med minst 10 restauranger kring Stortorget 29 (24 st, från prototypen)
+- [x] Frontend i `docs/` som läser `menus.json`, fungerar på mobil
 - [ ] Minst 6 restauranger hämtas automatiskt; resten visas med länk till menyn
 - [ ] GitHub Action kör vardagar och committar `menus.json`
-- [ ] Sajten live på GitHub Pages, fungerar på mobil
+- [ ] Sajten live på GitHub Pages (Settings → Pages → `main` / `docs`)
 - [ ] README med "Sätt upp för ditt kontor på 10 minuter"
 - [ ] Tester för varje scraper, grön CI
