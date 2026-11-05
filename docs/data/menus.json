@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-22",
-  "updated_at": "2026-10-22T10:01:00+02:00",
+  "date": "2026-11-05",
+  "updated_at": "2026-11-05T11:21:38+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -201,492 +201,603 @@
     }
   ],
   "items": {
-    "benne": {
-      "status": "standing",
-      "dishes": [
-        {
-          "kind": "veg",
-          "name": "Slow Tomato",
-          "price": 59
-        },
-        {
-          "kind": "veg",
-          "name": "Swedish Cheese",
-          "price": 75
-        },
-        {
-          "kind": "meat",
-          "name": "Smoked Pig",
-          "price": 85
-        },
-        {
-          "kind": "meat",
-          "name": "Silky Bird",
-          "price": 95
-        },
-        {
-          "kind": "veg",
-          "name": "The Shrooms",
-          "price": 99
-        },
-        {
-          "kind": "fish",
-          "name": "Chili Shrimp (The Visitor)",
-          "price": 99
-        }
-      ],
-      "note": "Pasta bar menu; new 'The Visitor' pasta from 22 Oct",
-      "source": "https://bennepastabar.se/"
-    },
-    "bistroroyal": {
-      "status": "today",
-      "dishes": [
-        {
-          "desc": "Pommes, primörer och choronsås",
-          "kind": "meat",
-          "name": "Grillad kalvytterfilé",
-          "price": 185
-        },
-        {
-          "desc": "Potatispuré, inlagd gurka och skysås",
-          "kind": "meat",
-          "name": "Biff a la Lindström",
-          "price": 125
-        },
-        {
-          "desc": "Risotto, ruccola, citron och aioli",
-          "kind": "fish",
-          "name": "Grillad tonfisk",
-          "price": 145
-        },
-        {
-          "desc": "Sparris och kantareller",
-          "kind": "veg",
-          "name": "Höstig risotto",
-          "price": 135
-        }
-      ],
-      "source": "https://www.menydags.se/restaurang/bistro-royal/lunch"
-    },
-    "dazio": {
+    "piccolo": {
       "status": "none",
-      "dishes": [],
-      "note": "No current lunch menu found online"
+      "dishes": []
     },
-    "edda": {
-      "status": "link",
-      "dishes": [],
-      "note": "Lunch menu posted on Instagram only"
+    "victors": {
+      "status": "none",
+      "dishes": []
     },
-    "gustavadolf": {
-      "status": "standing",
-      "dishes": [
-        {
-          "desc": "Potatispuré, lingon och gräddsås",
-          "kind": "meat",
-          "name": "Sten Bromans köttbullar",
-          "price": 189
-        },
-        {
-          "desc": "Friterad fisk, pommes och tartarsås",
-          "kind": "fish",
-          "name": "Fish & chips",
-          "price": 189
-        },
-        {
-          "desc": "Rödvinssås, bearnaisesås och stekt potatis",
-          "kind": "meat",
-          "name": "Vår populära schnitzel",
-          "price": 199
-        },
-        {
-          "desc": "Skogssvampsås och italiensk hårdost",
-          "kind": "meat",
-          "name": "Pasta penne med grillad kyckling",
-          "price": 149
-        },
-        {
-          "desc": "Pommes och dijon/honungsdressing",
-          "kind": "veg",
-          "name": "Grillad halloumi",
-          "price": 140
-        },
-        {
-          "desc": "Grillad kyckling, bacon, caesardressing, vitlökskrutonger",
-          "kind": "meat",
-          "name": "Caesarsallad på Gustavs vis",
-          "price": 159
-        }
-      ],
-      "note": "Same menu every weekday; salad buffet, bread and coffee included",
-      "source": "https://www.menydags.se/restaurang/gustav-adolf/lunch"
-    },
-    "kol": {
-      "status": "today",
-      "dishes": [
-        {
-          "desc": "Grillblandning",
-          "kind": "meat",
-          "name": "Dagens kött: Mixed Grill",
-          "price": null
-        },
-        {
-          "desc": "Potatispuré, smörad tomatsås, haricots verts, rostad blomkål",
-          "kind": "fish",
-          "name": "Veckans fisk: Halstrad makrill",
-          "price": 185
-        },
-        {
-          "desc": "Spenat och ricotta, röd pesto, friterad kronärtskocka, grana padano",
-          "kind": "veg",
-          "name": "Veckans vegetariska: Tortellini",
-          "price": 155
-        },
-        {
-          "desc": "Cheddar, BBQ-sås, pommes frites, bacon-aioli",
-          "kind": "meat",
-          "name": "Grilled Burger",
-          "price": 210
-        },
-        {
-          "desc": "Grillad tonfisksallad med chili- och sesamdressing",
-          "kind": "fish",
-          "name": "Tuna",
-          "price": 225
-        },
-        {
-          "desc": "Torrhängd ryggbiff, pommes frites och bearnaise",
-          "kind": "meat",
-          "name": "Sirloin",
-          "price": 345
-        }
-      ],
-      "note": "Salad, bread and coffee included",
-      "source": "https://www.menydags.se/restaurang/kol-cocktails-malmo/lunch"
+    "steakhouse": {
+      "status": "none",
+      "dishes": []
     },
     "kramer": {
       "status": "none",
-      "dishes": [],
-      "note": "No current lunch menu found online"
-    },
-    "masala": {
-      "status": "none",
-      "dishes": [],
-      "note": "Rotating menus posted only as images (dated 2025); naan, salad and water included",
-      "source": "https://masalakitchen.se/lunch/"
-    },
-    "mjs": {
-      "status": "today",
-      "dishes": [
-        {
-          "desc": "Risoni, soltorkad tomat, grillad svamp, fetaost, oliver",
-          "kind": "veg",
-          "name": "Veggie of the Week",
-          "price": 160
-        },
-        {
-          "desc": "Bakad lubb, grillad purjolök, tomat, paprika, romesco, ras el hanout",
-          "kind": "fish",
-          "name": "Fish of the Week",
-          "price": 170
-        },
-        {
-          "desc": "Grillad salsiccia, spetskål, palsternacka, brynt smör, citron",
-          "kind": "meat",
-          "name": "Meat of the Week",
-          "price": 170
-        },
-        {
-          "desc": "Tahini, päron, fetaost, valnötter, picklad tomat",
-          "kind": "veg",
-          "name": "Salad",
-          "price": 155
-        },
-        {
-          "desc": "Mojo rojo, pangrattato, spenat, vitlök, gräslök",
-          "kind": "meat",
-          "name": "Beef Tartar",
-          "price": 155
-        },
-        {
-          "desc": "Tillbehör varierar dagligen",
-          "kind": "meat",
-          "name": "Schnitzel",
-          "price": 185
-        }
-      ],
-      "source": "https://www.menydags.se/restaurang/mjs/lunch"
-    },
-    "namu": {
-      "status": "standing",
-      "dishes": [
-        {
-          "desc": "Ris, inlagda grönsaker, kimchi, 63-gradigt ägg, bibimbapsås",
-          "kind": "other",
-          "name": "Bibimbap med kyckling eller tofu",
-          "price": 159
-        },
-        {
-          "desc": "Två ångade bullar med grillad fläsksida, hoisin, gurka, koriander",
-          "kind": "meat",
-          "name": "Gua Bao",
-          "price": 190
-        },
-        {
-          "desc": "Kycklingbuljong, färska nudlar, chiliolja, chilibiff, ägg",
-          "kind": "meat",
-          "name": "Ramyun",
-          "price": 199
-        }
-      ],
-      "note": "Week 43 weekly special not published; regular dishes shown. Coffee included",
-      "source": "https://www.menydags.se/restaurang/namu/lunch"
+      "dishes": []
     },
     "osaka": {
       "status": "today",
       "dishes": [
         {
-          "desc": "Välj kyckling, nötkött, fläsk, yakiniku eller tofu",
-          "kind": "other",
           "name": "Bibimbap",
-          "price": 128
-        },
-        {
-          "desc": "Krämig curry med ris; kyckling, yakiniku, fläsk eller tofu",
+          "desc": "Koreansk risrätt med färska grönsaker. Välj mellan kyckling, biff & kyckling, biff & fläsk, yakinikubiff, grillat fläsk eller friterad tofu.",
           "kind": "other",
-          "name": "Japansk curry",
           "price": 128
         },
         {
-          "desc": "Sushiris eller glasnudlar; lax, kyckling, yakiniku, tofu eller fläsk",
-          "kind": "other",
-          "name": "Poké bowl",
-          "price": 128
-        },
-        {
-          "desc": "Kockens urval, från 128 kr beroende på storlek",
+          "name": "Californiarulle",
+          "desc": "Färsk sushi rulle",
           "kind": "fish",
-          "name": "Mixad sushimeny",
-          "price": 128
-        },
-        {
-          "kind": "fish",
-          "name": "Färsk laxrulle",
           "price": 118
         },
         {
-          "kind": "veg",
+          "name": "Färsk laxrulle",
+          "desc": "Färsk sushi rulle",
+          "kind": "fish",
+          "price": 118
+        },
+        {
+          "name": "Hawaiiansk räkrulle",
+          "desc": "Färsk sushi rulle",
+          "kind": "fish",
+          "price": 118
+        },
+        {
+          "name": "Japansk curry",
+          "desc": "Krämig japansk curry med ris. Välj mellan kyckling, yakinikubiff, grillat fläsk eller friterad tofu.",
+          "kind": "other",
+          "price": 128
+        },
+        {
+          "name": "Mixad sushimeny",
+          "desc": "Kockens val av färsk sushi med koreansk och japansk inspiration. Fem storlekar: 128 / 148 / 178 / 258 / 498 kr.",
+          "kind": "fish"
+        },
+        {
+          "name": "Poké bowl",
+          "desc": "Serveras med sushiris eller glasnudlar och grönsaker. Välj mellan färsk lax, teriyakikyckling, yakinikubiff, marinerad tofu eller grillat fläsk.",
+          "kind": "other",
+          "price": 128
+        },
+        {
+          "name": "Teriyakikycklingrulle",
+          "desc": "Färsk sushi rulle",
+          "kind": "meat",
+          "price": 118
+        },
+        {
           "name": "Tofu- & avokadorulle",
+          "desc": "Färsk sushi rulle",
+          "kind": "other",
           "price": 118
         }
       ],
-      "note": "Drink included",
       "source": "https://www.menydags.se/restaurang/osaka/lunch"
     },
-    "ostergatan25": {
-      "status": "standing",
-      "dishes": [
-        {
-          "desc": "Pizza, pasta, lasagne och salladsbuffé",
-          "kind": "buffet",
-          "name": "Lunchbuffé",
-          "price": 129
-        }
-      ],
-      "note": "All-you-can-eat; salad buffet included",
-      "source": "https://www.menydags.se/restaurang/ostergatan-no25"
-    },
-    "piccolo": {
-      "status": "none",
-      "dishes": [],
-      "note": "No current lunch menu found online"
-    },
-    "rosegarden": {
-      "status": "standing",
-      "dishes": [
-        {
-          "desc": "Kinesiskt, thailändskt, sushi, pho, dim sum, sallad och något sött",
-          "kind": "buffet",
-          "name": "Lunchbuffé",
-          "price": 155
-        }
-      ],
-      "note": "Weekday buffet; drinks, coffee and tea included",
-      "source": "https://www.menydags.se/restaurang/rosegarden-stora-nygatan"
-    },
     "ruths": {
-      "status": "none",
-      "dishes": [],
-      "note": "No menu published for Thursday; lunch usually 155–275 kr incl. sourdough bread and coffee",
-      "source": "https://www.menydags.se/restaurang/ruths/lunch"
-    },
-    "saltimporten-canteen": {
       "status": "today",
       "dishes": [
         {
-          "kind": "fish",
-          "name": "Lax / Saffran / Fänkål / Vitlök",
-          "price": null
+          "name": "Luques-oliver",
+          "desc": "Gröna franska oliver",
+          "kind": "other",
+          "price": 85
+        },
+        {
+          "name": "Saltrostade valenciamandlar",
+          "desc": "Mandlar",
+          "kind": "other",
+          "price": 55
+        },
+        {
+          "name": "Ostron legris & xipister",
+          "kind": "other"
+        },
+        {
+          "name": "Rosette de lyon",
+          "desc": "Fransk salami",
+          "kind": "meat",
+          "price": 85
+        },
+        {
+          "name": "Fiocco di prosciutto",
+          "desc": "Italiensk lufttorkad skinka",
+          "kind": "meat",
+          "price": 175
+        },
+        {
+          "name": "Kycklingterrine",
+          "desc": "Bacon, aprikos & hasselnötter",
+          "kind": "meat",
+          "price": 155
+        },
+        {
+          "name": "Lardo & sardeller på grillat bröd",
+          "kind": "other",
+          "price": 110
+        },
+        {
+          "name": "Baby gem-sallad",
+          "desc": "Saltbakade gulbetor, vinterrädisor, granatäpplevinaigrette, valnötter & ricotta salata",
+          "kind": "other",
+          "price": 165
+        },
+        {
+          "name": "Chorizo- & kastanjesoppa",
+          "kind": "meat",
+          "price": 165
+        },
+        {
+          "name": "Boudin blanc",
+          "desc": "Potatismos & äpple fyllt med sviskon & rökt sidfläsk",
+          "kind": "meat",
+          "price": 185
+        },
+        {
+          "name": "Hallonsemifreddo & pistagebrittle",
+          "kind": "veg",
+          "price": 125
+        },
+        {
+          "name": "Pumpa- & valnötskaka",
+          "desc": "Med bourbonsmör",
+          "kind": "other",
+          "price": 75
+        },
+        {
+          "name": "Chokladkaka & vispad grädde",
+          "kind": "other",
+          "price": 95
+        },
+        {
+          "name": "Comtè",
+          "desc": "Lagrad fransk hårdost",
+          "kind": "other",
+          "price": 95
         }
       ],
-      "note": "Price not listed on the site",
-      "source": "https://www.saltimporten.com/"
+      "source": "https://www.menydags.se/restaurang/ruths/lunch"
     },
-    "spoonery": {
-      "status": "none",
-      "dishes": [],
-      "note": "Daily soups and stews; menu not published online",
-      "source": "https://spoonery.se/"
+    "namu": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Gua Bao",
+          "desc": "Två hembakade ångade bröd, grillat sidfläsk från Eslöv, hoisin, Namu hotsauce, gurka och koriander. Serveras med en sallad på sesam, yuzu & grönt äpple",
+          "kind": "meat",
+          "price": 190
+        },
+        {
+          "name": "Veckans special",
+          "desc": "Sotad ASC-Lax från Färöarna, marinerad 24h i misozuke, smörsås, vitlök, ångad pakchoy, ris från Italien",
+          "kind": "fish",
+          "price": 179
+        },
+        {
+          "name": "Bibimbap med kyckling eller tofu",
+          "desc": "Bulgogi-kycklinglår eller friterad tofu från Marieholm, ris från Italien, picklade & marinerade grönsaker, Namu´s kimchi, Hyllehög - ägg 63°, bibimbapsås. -Äts bäst med sked",
+          "kind": "other"
+        },
+        {
+          "name": "Namulunch 3-rätters",
+          "desc": "Trerätters lunch; förrätt, varmrätt & dessert komponerat av vårt kök",
+          "kind": "other",
+          "price": 455
+        },
+        {
+          "name": "Ramyun",
+          "desc": "Buljong på rostad kyckling, färska nudlar från Nordic Noodles, Namu´s chiliolja, högrev med chili, knarkägg, grönt. (Lätt och ren \"shio style buljong\" utan MSG -Vi rekommenderar kimchi till",
+          "kind": "meat",
+          "price": 199
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/namu/lunch"
     },
-    "steakhouse": {
-      "status": "none",
-      "dishes": [],
-      "note": "No current lunch menu found online"
+    "mjs": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Veggie of the Week",
+          "desc": "Rostad spetskål, bakad tomat, kikärtor, picklad rödlök, tahiniyoghurt",
+          "kind": "veg",
+          "price": 160
+        },
+        {
+          "name": "Fish of the Week",
+          "desc": "Sotad lax, patatas panaderas, grillade padrones, salsa verde, rostade mandlar",
+          "kind": "fish",
+          "price": 170
+        },
+        {
+          "name": "Meat of the Week",
+          "desc": "Konfiterat anklår, potatispuré, ciderbrässerad savoykål, rödvinssky",
+          "kind": "other",
+          "price": 170
+        },
+        {
+          "name": "Salad",
+          "desc": "Tahinidressade blad, päron, fetaost, valnöt, picklad tomat",
+          "kind": "other",
+          "price": 155
+        },
+        {
+          "name": "Beef Tartar",
+          "desc": "Mojo rojo, pangrattato, spenat, vit lök och gräslök",
+          "kind": "meat",
+          "price": 155
+        },
+        {
+          "name": "Cabbage",
+          "desc": "Valencia-mandlar, getost, harissa, oregano",
+          "kind": "other",
+          "price": 145
+        },
+        {
+          "name": "Schnitzel",
+          "desc": "Fråga din servitör om dagens tillbehör",
+          "kind": "meat",
+          "price": 185
+        },
+        {
+          "name": "Chocolate mousse",
+          "desc": "Olive oil, sea salt",
+          "kind": "other",
+          "price": 65
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/mjs/lunch"
     },
     "sture": {
       "status": "today",
       "dishes": [
         {
-          "desc": "Kokkorv, rimmad högrev, rökt fläsk och senap",
+          "name": "Älg bourguignonne",
+          "desc": "Serveras med potatismos",
           "kind": "meat",
-          "name": "Rotmos",
           "price": 175
         },
         {
-          "desc": "Olivolja, kapris, zucchini, basilika och citron",
+          "name": "Kolja",
+          "desc": "Smör, pepparrot, räkor, citron och ärtor",
           "kind": "fish",
-          "name": "Halstrad sej",
-          "price": 275
+          "price": 285
         },
         {
-          "desc": "Trattkantareller, druvor, gräslök och parmesan",
+          "name": "Tortelonni",
+          "desc": "Spenat, svamp, zucchini och parmesan",
           "kind": "veg",
-          "name": "Spagetti",
           "price": 195
-        },
-        {
-          "desc": "Stuvade makaroner & Stures ketchup",
-          "kind": "meat",
-          "name": "Stekt falukorv",
-          "price": 195
-        },
-        {
-          "desc": "Stuvad potatis, senap och rödbetor",
-          "kind": "meat",
-          "name": "Isterband",
-          "price": 245
         }
       ],
-      "source": "https://www.menydags.se/restaurang/brasserie-sture-1912"
+      "source": "https://www.menydags.se/restaurang/brasserie-sture-1912/lunch"
+    },
+    "kol": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Mixed grill",
+          "desc": "Blandade grillrätter",
+          "kind": "meat"
+        },
+        {
+          "name": "Halstrad lax",
+          "desc": "Örtslungad potatis, hollandaisesås, broccoli, ärtor",
+          "kind": "fish",
+          "price": 185
+        },
+        {
+          "name": "Friterad halloumi",
+          "desc": "Krossad potatis, grillade grönsaker, tzatziki",
+          "kind": "veg",
+          "price": 155
+        },
+        {
+          "name": "Charred Carpaccio",
+          "desc": "Tryffelcréme, parmesan, ruccola, marconamandlar",
+          "kind": "meat",
+          "price": 145
+        },
+        {
+          "name": "Sirloin",
+          "desc": "Hängmörad ryggbiff från vår egen mörningskyl (21 dgr), pommes frites, bearnaisesås",
+          "kind": "meat",
+          "price": 345
+        },
+        {
+          "name": "Grilled Burger",
+          "desc": "Högrev 90%, rökt sidfläsk 10%, cheddarost, majonnäs, bbq sås, pommes frites, baconaioli",
+          "kind": "meat",
+          "price": 210
+        },
+        {
+          "name": "Tuna",
+          "desc": "Grillad tonfisksallad, chili- & sesamdressing",
+          "kind": "fish",
+          "price": 225
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/kol-cocktails-malmo/lunch"
+    },
+    "spoonery": {
+      "status": "none",
+      "dishes": []
+    },
+    "gustavadolf": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Pasta penne med grillad kyckling",
+          "desc": "Skogssvampsås och italiensk hårdost",
+          "kind": "meat",
+          "price": 149
+        },
+        {
+          "name": "Grillad halloumi",
+          "desc": "Krispiga pommes och dijon/honungsdressing",
+          "kind": "veg",
+          "price": 140
+        },
+        {
+          "name": "Fish & chips",
+          "desc": "Friterad fisk, krispiga pommes och tartarsås",
+          "kind": "fish",
+          "price": 189
+        },
+        {
+          "name": "Caesarsallad på Gustavs vis",
+          "desc": "Nygrillad kyckling, knaprig bacon, caesardressing och vitlökskrutonger",
+          "kind": "meat",
+          "price": 159
+        },
+        {
+          "name": "Vår populära schnitzel",
+          "desc": "Rödvinssås, bearnaisesås och stekt potatis",
+          "kind": "meat",
+          "price": 199
+        },
+        {
+          "name": "Räksallad",
+          "desc": "Handskalade räkor, ägg och Rhode Island-dressing",
+          "kind": "fish",
+          "price": 199
+        },
+        {
+          "name": "Kolgrillad novillo ryggbiff",
+          "desc": "Pommes frites, kryddsmör och rödvinssås",
+          "kind": "meat",
+          "price": 255
+        },
+        {
+          "name": "Sten Bromans köttbullar",
+          "desc": "Potatispuré, lingon och gräddsås",
+          "kind": "meat",
+          "price": 189
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/gustav-adolf/lunch"
+    },
+    "masala": {
+      "status": "link",
+      "dishes": [],
+      "source": "https://masalakitchen.se/lunch/"
     },
     "sushiyama": {
       "status": "today",
       "dishes": [
         {
-          "desc": "Sushiris, marinerad lax, avokado, mango, puffat ris",
-          "kind": "fish",
-          "name": "Nordic Salmon Bowl",
-          "price": 125
-        },
-        {
-          "desc": "Sushiris, yakiniku-biff, kimchi, picklad rödlök",
-          "kind": "meat",
-          "name": "Yakiniku Bowl",
-          "price": 125
-        },
-        {
-          "desc": "Sushiris, marinerad tofu, avokado, mango, sjögräs",
-          "kind": "veg",
-          "name": "Swedish Tofu Avocado Bowl",
-          "price": 125
-        },
-        {
-          "desc": "Lax-, räk- och avokadonigiri, crispy California rolls",
-          "kind": "fish",
-          "name": "Combo Original 12",
-          "price": 125
-        },
-        {
-          "desc": "Avokado-, sparris- och tofunigiri, crispy tofu teriyaki",
-          "kind": "veg",
-          "name": "Combo Green 12",
-          "price": 125
-        },
-        {
-          "desc": "Yakiniku, kålsallad, 4 nigiri, veganska dumplings",
-          "kind": "meat",
           "name": "Bento Yakiniku",
+          "desc": "Yakiniku toppat med Korean BBQ och vit sesam, serveras med japansk kålsallad och susiris, valfria nigiri (4 st), veganska dumplings toppade med vårlök (3 st), serveras med valfri mayo",
+          "kind": "meat",
+          "price": 125
+        },
+        {
+          "name": "Combo Green 12",
+          "desc": "Nigiri: 3 avokado, 2 Flamed Asparagus Miso, 2 tofu och Maki: 5 Crispy Tofu Teriyaki",
+          "kind": "veg",
+          "price": 125
+        },
+        {
+          "name": "Combo Original 12",
+          "desc": "Nigiri: 3 lax, 2 räka, 2 avokado och Maki: 5 Crispy California med rostad lök och Chili Mayo",
+          "kind": "fish",
+          "price": 125
+        },
+        {
+          "name": "Crispy California 10",
+          "desc": "Sushi roll fylld med seafoodröra, gurka och avokado. Toppas med chilimajonnäs, rostad lök och sesamfrön",
+          "kind": "fish",
+          "price": 125
+        },
+        {
+          "name": "Crispy Dumplings Pick & Choose 12",
+          "desc": "Dina val av krispigt friterade biff, fläsk eller veganska gyoza toppade med skivad vårlök. Serveras med japansk kållsallad toppad med svarta sesamfrön",
+          "kind": "other",
+          "price": 125
+        },
+        {
+          "name": "Crispy Tofu Teriyaki 10",
+          "desc": "Sushi Roll fylld med tofu, gurka och avokado. Toppas med vegansk kimchimayo, sesamfrö, rostad lök och oxalis",
+          "kind": "other",
+          "price": 125
+        },
+        {
+          "name": "Nordic Salmon Bowl",
+          "desc": "Sushiris, marinerad lax, avokado, japansk kålsallad, gurka, inlagd ingefära, sojabönor, mango, morötter, frissésalladsblandning. Toppas med svarta sesamfrön och ararepuffar",
+          "kind": "fish",
+          "price": 125
+        },
+        {
+          "name": "Salmon & Avocado Roll",
+          "desc": "Smarrig lax och läcker avokado i kombination med krispig gurka. Toppad för perfektion med chilimajonnäs, svart sesamfrö och körvel",
+          "kind": "fish",
+          "price": 125
+        },
+        {
+          "name": "Swedish Tofu Avocado Bowl",
+          "desc": "Sushiris, halstrad och Ginger Soy-marinerad tofu från Yipin, avokado, japansk kålsallad, gurka, sojabönor, mango, morötter, frissésalladsblandning, goma wakame, svart sesam, ararepuffar och vårlök",
+          "kind": "other",
+          "price": 125
+        },
+        {
+          "name": "Yakiniku Bowl",
+          "desc": "Sushiris, yakiniku på nötkött, japansk kålsallad, kimchi, sojabönor, morötter, frissésalladsblandning, picklad rödlök, asiatisk gurka, sesamfrö och strimlad vårlök",
+          "kind": "meat",
           "price": 125
         }
       ],
-      "note": "All lunch dishes 125 kr, drink included",
       "source": "https://www.menydags.se/restaurang/sushi-yama-hansa/lunch"
+    },
+    "rosegarden": {
+      "status": "standing",
+      "dishes": [
+        {
+          "name": "Lunchbuffé",
+          "desc": "Kinesiskt, thailändskt, sushi, pho, dim sum, sallad och lite sött efter maten",
+          "kind": "buffet",
+          "price": 155
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/rosegarden-stora-nygatan/lunch"
+    },
+    "bistroroyal": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Grillad kalvytterfilé",
+          "desc": "Pommes, primörer och choronsås",
+          "kind": "meat",
+          "price": 185
+        },
+        {
+          "name": "Wallenbergare",
+          "desc": "Skirat smör, potatispuré, gröna ärtor och lingon",
+          "kind": "meat",
+          "price": 125
+        },
+        {
+          "name": "Torskrygg",
+          "desc": "Vitvinssås, potatispuré, citron och grönsaker",
+          "kind": "fish",
+          "price": 145
+        },
+        {
+          "name": "Höstig risotto",
+          "desc": "Sparris, kantareller och ost",
+          "kind": "other",
+          "price": 135
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/bistro-royal/lunch"
     },
     "tipico": {
       "status": "today",
       "dishes": [
         {
-          "desc": "Guanciale, pecorino och ägg",
-          "kind": "meat",
           "name": "Spaghetti Carbonara",
-          "price": 129
-        },
-        {
-          "desc": "Hemmagjord pasta, tomatsås, vitlök, chili och olivolja",
-          "kind": "veg",
-          "name": "Pasta all'Arrabiata",
-          "price": 129
-        },
-        {
-          "desc": "Tonfisk, tomat, mozzarella, kronärtskocka, gurka, oliver, paprika",
-          "kind": "fish",
-          "name": "Tonfisksallad",
-          "price": 129
-        },
-        {
-          "desc": "Parmaskinka, tomat, mozzarella, kronärtskocka och gurka",
+          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
           "kind": "meat",
-          "name": "Parmasallad",
           "price": 129
         },
         {
-          "desc": "Pesto, taleggio, kronärtskocka och soltorkad tomat",
-          "kind": "veg",
+          "name": "Pasta all´Arrabiata",
+          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
+          "kind": "other",
+          "price": 129
+        },
+        {
+          "name": "Tonfisksallad",
+          "desc": "Tonfisk, tomat, mozzarella, kronärtskocka, gurka, oliver och paprika",
+          "kind": "fish",
+          "price": 129
+        },
+        {
+          "name": "Parmasallad",
+          "desc": "Parmaskinka, tomat, mozzarella, kronärtskocka, gruka",
+          "kind": "meat",
+          "price": 129
+        },
+        {
           "name": "Focaccia Vegetariana",
+          "desc": "Hemmagjord pesto, tallegio-ost, kornärtskocka och soltorkad tomat",
+          "kind": "veg",
           "price": 130
         },
         {
-          "desc": "Mortadella, burrata, pistagepesto och rucola",
-          "kind": "meat",
+          "name": "Focaccia Parma",
+          "desc": "Parmaskinka, pesto, buffelmozzarella, basilika och tomat",
+          "kind": "buffet",
+          "price": 130
+        },
+        {
           "name": "Focaccia Moratadella",
+          "desc": "Moratadella, burrata, pistage-pesto och ruccola",
+          "kind": "other",
           "price": 140
         }
       ],
       "source": "https://www.menydags.se/restaurang/tipico/lunch"
     },
-    "tugg": {
-      "status": "today",
+    "benne": {
+      "status": "link",
+      "dishes": [],
+      "source": "https://bennepastabar.se/"
+    },
+    "dazio": {
+      "status": "none",
+      "dishes": []
+    },
+    "ostergatan25": {
+      "status": "standing",
       "dishes": [
         {
-          "desc": "Burgare med pommes",
-          "kind": "meat",
-          "name": "Dagens lunch",
-          "price": 109
+          "name": "Lunchbuffé",
+          "desc": "Pizza, pasta, lasagne och salladsbuffé",
+          "kind": "buffet",
+          "price": 129
         }
       ],
-      "note": "Fries, coffee and water included",
-      "source": "https://www.mylunch.se/malmo/tugg-burgers/lunch/"
+      "source": "https://www.menydags.se/restaurang/ostergatan-no25/lunch"
     },
     "vibliotek": {
       "status": "none",
       "dishes": [],
-      "note": "No menu published this week; lunch 145 kr",
+      "note": "No menu published for today",
       "source": "https://www.mylunch.se/malmo/vibliotek/lunch/"
     },
-    "victors": {
-      "status": "none",
+    "tugg": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Dagens lunch på Tugg Burgers från",
+          "desc": "Burgare med fries och kaffe. Bubbelvatten/ stilla vatten ingår. Valfri dipp +10 kr",
+          "kind": "meat",
+          "price": 109
+        },
+        {
+          "name": "Barnmeny",
+          "kind": "other",
+          "price": 85
+        }
+      ],
+      "source": "https://www.mylunch.se/malmo/tugg-burgers/lunch/"
+    },
+    "edda": {
+      "status": "link",
       "dishes": [],
-      "note": "No current lunch menu found online"
+      "source": "https://www.instagram.com/eddamalmo"
+    },
+    "saltimporten-canteen": {
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Gris",
+          "desc": "Pita, avokado, pico de gallo",
+          "kind": "other"
+        }
+      ],
+      "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
     }
   }
 }
