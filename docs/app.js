@@ -130,50 +130,74 @@
       "</article>";
   }
 
-  function render() {
-    const d = state.data;
-    if (!d) return;
-    renderHeader(d);
-    const list = $("#list");
-    if (!d.restaurants.length) { list.innerHTML = '<div class="empty">No restaurants listed yet. Add some to config.yaml.</div>'; return; }
+  const hasMenu = (entry) => Boolean(entry) && (entry.status === "today" || entry.status === "standing") && (entry.dishes || []).length > 0;
 
-    const withMenu = [], without = [];
-    for (const r of d.restaurants) {
-      const e = (d.items || {})[r.id];
-      if (e && (e.status === "today" || e.status === "standing") && (e.dishes || []).length) withMenu.push([r, e]);
-      else without.push([r, e]);
+  // Splits restaurants into those with a menu to show as cards and those listed under "No menu online".
+  function partitionByMenu(data) {
+    const withMenu = [], withoutMenu = [];
+    for (const restaurant of data.restaurants) {
+      const entry = (data.items || {})[restaurant.id];
+      (hasMenu(entry) ? withMenu : withoutMenu).push([restaurant, entry]);
     }
+    return { withMenu, withoutMenu };
+  }
 
-    const rows = withMenu.map(([r, e]) => {
-      let dishes = e.dishes;
-      if (state.kinds.size) dishes = dishes.filter((x) => state.kinds.has(x.kind));
-      if (state.q) dishes = dishes.filter((x) => (x.name + " " + (x.desc || "")).toLowerCase().includes(state.q) || r.name.toLowerCase().includes(state.q));
-      return { r, e, dishes };
-    }).filter((x) => x.dishes.length);
+  // Dishes that pass the active kind filters and search query (a restaurant-name match keeps all its dishes).
+  function filterDishes(restaurant, dishes) {
+    let visible = dishes;
+    if (state.kinds.size) visible = visible.filter((dish) => state.kinds.has(dish.kind));
+    if (state.q) visible = visible.filter((dish) => (dish.name + " " + (dish.desc || "")).toLowerCase().includes(state.q) || restaurant.name.toLowerCase().includes(state.q));
+    return visible;
+  }
 
-    const byDist = (a, b) => compareDistance(a.r, b.r);
-    rows.sort(state.sort === "price" ? (a, b) => (minPrice(a.dishes) ?? UNKNOWN_PRICE) - (minPrice(b.dishes) ?? UNKNOWN_PRICE) || byDist(a, b) : byDist);
+  function sortRows(rows) {
+    const byDistance = (a, b) => compareDistance(a.r, b.r);
+    const byPrice = (a, b) => (minPrice(a.dishes) ?? UNKNOWN_PRICE) - (minPrice(b.dishes) ?? UNKNOWN_PRICE) || byDistance(a, b);
+    return rows.sort(state.sort === "price" ? byPrice : byDistance);
+  }
 
-    list.innerHTML = rows.length
+  function renderMenuGrid(withMenu) {
+    const rows = withMenu
+      .map(([r, e]) => ({ r, e, dishes: filterDishes(r, e.dishes) }))
+      .filter((row) => row.dishes.length);
+    sortRows(rows);
+    $("#list").innerHTML = rows.length
       ? '<div class="grid">' + rows.map(({ r, e, dishes }) => cardHTML(r, e, dishes)).join("") + "</div>"
       : '<div class="empty">No dishes match these filters. Clear a filter to see more.</div>';
+  }
 
+  function noMenuItemHTML(r, e) {
+    const note = extraInfo(r, e);
+    return '<div class="nitem"><div class="row"><b>' + esc(r.name) + '</b><span class="price">' + metersHTML(r) + "</span></div>" +
+      (r.favourite ? "<div>" + favouriteTagHTML(r, false) + "</div>" : "") +
+      metaLineHTML(r) +
+      (note ? '<div class="meta">' + esc(note) + "</div>" : "") + menuLink(r, e) + "</div>";
+  }
+
+  function renderNoMenuList(withoutMenu) {
     const box = $("#nomenuBox");
-    if (!without.length) { box.hidden = true; return; }
+    if (!withoutMenu.length) { box.hidden = true; return; }
     box.hidden = false;
-    $("#nomenuSum").textContent = "No menu online (" + without.length + ")";
-    without.sort(([a], [b]) => compareDistance(a, b));
-    $("#nlist").innerHTML = without.map(([r, e]) => {
-      const note = extraInfo(r, e);
-      return '<div class="nitem"><div class="row"><b>' + esc(r.name) + '</b><span class="price">' + metersHTML(r) + "</span></div>" +
-        (r.favourite ? "<div>" + favouriteTagHTML(r, false) + "</div>" : "") +
-        metaLineHTML(r) +
-        (note ? '<div class="meta">' + esc(note) + "</div>" : "") + menuLink(r, e) + "</div>";
-    }).join("");
+    $("#nomenuSum").textContent = "No menu online (" + withoutMenu.length + ")";
+    withoutMenu.sort(([a], [b]) => compareDistance(a, b));
+    $("#nlist").innerHTML = withoutMenu.map(([r, e]) => noMenuItemHTML(r, e)).join("");
+  }
+
+  // Re-renders the restaurant lists; called on load and whenever a filter, sort or search changes.
+  function render() {
+    const data = state.data;
+    if (!data) return;
+    if (!data.restaurants.length) {
+      $("#list").innerHTML = '<div class="empty">No restaurants listed yet. Add some to config.yaml.</div>';
+      return;
+    }
+    const { withMenu, withoutMenu } = partitionByMenu(data);
+    renderMenuGrid(withMenu);
+    renderNoMenuList(withoutMenu);
   }
 
   fetch("data/menus.json", { cache: "no-cache" })
     .then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })
-    .then((data) => { state.data = data; render(); })
+    .then((data) => { state.data = data; renderHeader(data); render(); })
     .catch(() => { $("#list").innerHTML = '<div class="empty">Couldn’t load today’s menus. Try reloading the page.</div>'; });
 })();
