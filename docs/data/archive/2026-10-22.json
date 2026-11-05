@@ -274,7 +274,7 @@
       "note": "No current lunch menu found online"
     },
     "edda": {
-      "status": "none",
+      "status": "link",
       "dishes": [],
       "note": "Lunch menu posted on Instagram only"
     },
