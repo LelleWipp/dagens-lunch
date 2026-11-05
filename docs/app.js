@@ -39,18 +39,33 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const speed = () => (state.data && state.data.walk_speed_m_per_min) || DEFAULT_WALK_SPEED_M_PER_MIN;
   const walk = (m) => Math.max(1, Math.ceil((m * ROUTE_FACTOR) / speed()));
-  const distKey = (r) => (typeof r.distance_m === "number" ? r.distance_m : UNKNOWN_DISTANCE);
+  const hasDistance = (r) => typeof r.distance_m === "number";
+  const distKey = (r) => (hasDistance(r) ? r.distance_m : UNKNOWN_DISTANCE);
+  const compareDistance = (a, b) => distKey(a) - distKey(b);
   const isUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
 
+  // Shared HTML fragments for menu cards and the "no menu online" list.
+  const metersHTML = (r) => (hasDistance(r) ? r.distance_m + " m" : "");
+  const metaLineHTML = (r) => '<div class="meta">' + esc(r.address) + (r.hours ? " · " + esc(r.hours) : "") + "</div>";
+  const extraInfo = (r, e) => (e && e.note) || r.includes;
+  function favouriteTagHTML(r, withTooltip) {
+    if (!r.favourite) return "";
+    const title = withTooltip ? ' title="' + esc(r.note || "Added by the office") + '"' : "";
+    return '<span class="tag fav"' + title + ">Office favourite</span>";
+  }
+  function externalLinkHTML(url, label, className) {
+    const cls = className ? ' class="' + className + '"' : "";
+    return "<a" + cls + ' href="' + esc(url) + '" target="_blank" rel="noopener">' + label + "</a>";
+  }
+
   function distHTML(r) {
-    if (typeof r.distance_m !== "number") return "<b>—</b><span>distance pending</span>";
-    return "<b>" + r.distance_m + " m</b><span>" + walk(r.distance_m) + " min walk</span>";
+    if (!hasDistance(r)) return "<b>—</b><span>distance pending</span>";
+    return "<b>" + metersHTML(r) + "</b><span>" + walk(r.distance_m) + " min walk</span>";
   }
   function menuLink(r, e) {
     const u = r.menu_source || (e && e.source);
     if (!isUrl(u)) return "";
-    return '<div class="meta"><a href="' + esc(u) + '" target="_blank" rel="noopener">' +
-      (/instagram\.com/i.test(u) ? "Lunch menu on Instagram ↗" : "Menu source ↗") + "</a></div>";
+    return '<div class="meta">' + externalLinkHTML(u, /instagram\.com/i.test(u) ? "Lunch menu on Instagram ↗" : "Menu source ↗") + "</div>";
   }
   function minPrice(dishes) {
     const ps = dishes.map((d) => d.price).filter((p) => typeof p === "number");
@@ -98,20 +113,20 @@
   }
 
   function cardHTML(r, e, dishes) {
-    const tags = (r.favourite ? '<span class="tag fav" title="' + esc(r.note || "Added by the office") + '">Office favourite</span>' : "") +
+    const tags = favouriteTagHTML(r, true) +
       (e.status === "standing" ? '<span class="tag warn" title="No dated menu for today was published; these dishes are on the menu every day">Standing menu</span>' : "");
     const dishHTML = dishes.map((d) =>
       '<li><span class="dot k-' + esc(d.kind || "other") + '"></span><div style="min-width:0"><div class="dname">' + esc(d.name) + "</div>" +
       (d.desc ? '<div class="ddesc">' + esc(d.desc) + "</div>" : "") + "</div>" +
       '<span class="price">' + (typeof d.price === "number" ? d.price + " kr" : esc(d.price || "")) + "</span></li>").join("");
-    const incl = e.note || r.includes;
+    const incl = extraInfo(r, e);
     return '<article class="card" data-id="' + esc(r.id) + '">' +
-      '<div class="chead"><div style="min-width:0"><h3>' + esc(r.name) + '</h3><div class="meta">' + esc(r.address) + (r.hours ? " · " + esc(r.hours) : "") + "</div></div>" +
+      '<div class="chead"><div style="min-width:0"><h3>' + esc(r.name) + "</h3>" + metaLineHTML(r) + "</div>" +
       '<div class="dist">' + distHTML(r) + "</div></div>" +
       (tags ? '<div class="tags">' + tags + "</div>" : "") +
       '<ul class="dishes">' + dishHTML + "</ul>" +
       (incl ? '<div class="incl">' + esc(incl) + "</div>" : "") +
-      (isUrl(e.source) ? '<div class="cfoot"><a class="src" href="' + esc(e.source) + '" target="_blank" rel="noopener">Source ↗</a></div>' : "") +
+      (isUrl(e.source) ? '<div class="cfoot">' + externalLinkHTML(e.source, "Source ↗", "src") + "</div>" : "") +
       "</article>";
   }
 
@@ -136,7 +151,7 @@
       return { r, e, dishes };
     }).filter((x) => x.dishes.length);
 
-    const byDist = (a, b) => distKey(a.r) - distKey(b.r);
+    const byDist = (a, b) => compareDistance(a.r, b.r);
     rows.sort(state.sort === "price" ? (a, b) => (minPrice(a.dishes) ?? UNKNOWN_PRICE) - (minPrice(b.dishes) ?? UNKNOWN_PRICE) || byDist(a, b) : byDist);
 
     list.innerHTML = rows.length
@@ -147,12 +162,12 @@
     if (!without.length) { box.hidden = true; return; }
     box.hidden = false;
     $("#nomenuSum").textContent = "No menu online (" + without.length + ")";
-    without.sort((a, b) => distKey(a[0]) - distKey(b[0]));
+    without.sort(([a], [b]) => compareDistance(a, b));
     $("#nlist").innerHTML = without.map(([r, e]) => {
-      const note = (e && e.note) || r.includes;
-      return '<div class="nitem"><div class="row"><b>' + esc(r.name) + '</b><span class="price">' + (typeof r.distance_m === "number" ? r.distance_m + " m" : "") + "</span></div>" +
-        (r.favourite ? '<div><span class="tag fav">Office favourite</span></div>' : "") +
-        '<div class="meta">' + esc(r.address || "") + (r.hours ? " · " + esc(r.hours) : "") + "</div>" +
+      const note = extraInfo(r, e);
+      return '<div class="nitem"><div class="row"><b>' + esc(r.name) + '</b><span class="price">' + metersHTML(r) + "</span></div>" +
+        (r.favourite ? "<div>" + favouriteTagHTML(r, false) + "</div>" : "") +
+        metaLineHTML(r) +
         (note ? '<div class="meta">' + esc(note) + "</div>" : "") + menuLink(r, e) + "</div>";
     }).join("");
   }
