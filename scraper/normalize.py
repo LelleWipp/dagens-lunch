@@ -25,11 +25,12 @@ SWEDISH_MONTHS = {
 # ("räk" in "träkolsgrillad"). A dish is classified from its name first and its description
 # second; when one text hits several kinds (e.g. "choose chicken or tofu") it is "other".
 _KIND_KEYWORDS: dict[Kind, tuple[str, ...]] = {
-    "buffet": ("buffé", "buffe", "buffet", "all you can eat", "all-you-can-eat"),
+    "buffet": ("buffé", "buffe", "buffet", "all you can eat", "all-you-can-eat"),  # "buffe" whole word only
     "fish": (
         "fisk", "lax", "torsk", "sej", "kolja", "spätta", "makrill", "sill", "strömming", "gös",
         "abborre", "hälleflundra", "kummel", "lubb", "tonfisk", "räk", "skaldjur", "mussl", "krabba",
-        "hummer", "sushi", "sashimi", "fish", "salmon", "tuna", "shrimp", "prawn", "seafood",
+        "hummer", "ostron", "sardell", "sushi", "sashimi", "fish", "salmon", "tuna", "shrimp", "prawn",
+        "seafood",
     ),
     "veg": (
         "vegetar", "vegan", "veggie", "halloumi", "falafel", "tofu", "linsgryta", "bönbiff",
@@ -41,9 +42,12 @@ _KIND_KEYWORDS: dict[Kind, tuple[str, ...]] = {
         "carpaccio", "salsiccia", "chorizo", "anka", "kalkon", "hjort", "älg", "renskav",
         "wallenbergare", "kåldolm", "isterband", "pulled pork", "chicken", "beef", "pork", "steak",
         "mixed grill", "pastrami", "kebab", "gyros", "yakiniku", "carbonara", "guanciale",
-        "mortadella", "prosciutto", "salami", "pancetta", "bulgogi",
+        "mortadella", "prosciutto", "salami", "pancetta", "bulgogi", "gris", "anklår", "ankbröst",
+        "meat",
     ),
 }  # fmt: skip
+# Matched only as a whole word: "buffe" is inside "buffelmozzarella", "gris" inside "grissini".
+_WHOLE_WORD = {"buffe", "gris", "meat"}
 _WORD_START_ONLY = {"sej", "sill", "gös", "räk", "lubb", "tuna", "anka", "älg", "lamm", "kalv"}
 # Vegetarian compounds that contain a meat word ("bönbiff" contains "biff") are removed before
 # looking for meat, so they do not turn a vegetarian dish into "other".
@@ -51,7 +55,10 @@ _VEG_COMPOUNDS = ("bönbiff", "grönsaksbiff", "vegobiff", "sojafärs", "vegofä
 
 
 def _pattern(stem: str) -> re.Pattern[str]:
-    prefix = r"(?<![a-zåäöéü])" if stem in _WORD_START_ONLY else ""
+    letter = "a-zåäöéü"
+    if stem in _WHOLE_WORD:
+        return re.compile(rf"(?<![{letter}]){re.escape(stem)}(?![{letter}])")
+    prefix = rf"(?<![{letter}])" if stem in _WORD_START_ONLY else ""
     return re.compile(prefix + re.escape(stem))
 
 

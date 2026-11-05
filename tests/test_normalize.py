@@ -40,6 +40,13 @@ def test_parse_price(raw, expected):
         ("Bento Yakiniku", "Kålsallad, 4 nigiri, veganska dumplings", "meat"),
         ("Dagens bowl", "Tofu eller kyckling", "other"),
         ("Veckans sallad", "Vegansk dressing, rökt lax", "other"),
+        # found in the first real run (2026-11-05)
+        ("Focaccia Parma", "Parmaskinka, pesto, buffelmozzarella", "meat"),
+        ("Gris", "Pita, avokado, pico de gallo", "meat"),
+        ("Grissini", "Med olivolja", "other"),
+        ("Meat of the Week", "Konfiterat anklår, potatispuré", "meat"),
+        ("Ostron", "Citron och schalottenlök", "fish"),
+        ("Lunch buffe", "", "buffet"),
     ],
 )
 def test_classify_dish(name, desc, expected):
