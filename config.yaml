@@ -1,6 +1,13 @@
 # Kontoret och restaurangerna sajten visar.
 # Forka repot och byt ut allt i den här filen för att sätta upp sajten för ditt kontor.
 # Avstånd räknas fågelvägen från office.lat/lon till varje restaurangs lat/lon.
+#
+# source (valfritt) säger var dagens meny hämtas:
+#   type: menydags  – url till restaurangens /lunch-sida på menydags.se (läser schema.org-menyn)
+#   type: mylunch   – url till restaurangens lunchsida på mylunch.se
+#   type: static    – samma rätter varje dag, listade under dishes (status "standing")
+#   type: link      – menyn finns bara via länken, t.ex. Instagram (status "link")
+# Utan source visas restaurangen under "No menu online".
 
 office:
   name: Consid
@@ -8,6 +15,8 @@ office:
   lat: 55.6056
   lon: 13.0003
   radius_m: 500
+  # IANA time zone: decides which day "today" is when the scraper runs (GitHub Actions runs in UTC).
+  timezone: Europe/Stockholm
 walk_speed_m_per_min: 80
 restaurants:
 - id: piccolo
@@ -42,6 +51,9 @@ restaurants:
   lon: 12.99794
   hours: Mon–Fri 11:00–15:00
   includes: Drink, miso soup and green tea included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/osaka/lunch
 - id: ruths
   name: Ruths
   address: Mäster Johansgatan 11, Malmö
@@ -49,6 +61,9 @@ restaurants:
   lon: 12.9977
   hours: Mon–Sat 12:00–14:30
   includes: Sourdough bread and coffee included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/ruths/lunch
 - id: namu
   name: Namu
   address: Landbygatan 5, Malmö
@@ -56,6 +71,9 @@ restaurants:
   lon: 12.99752
   hours: Tue–Fri 11:30–14:00
   includes: Coffee included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/namu/lunch
 - id: mjs
   name: MJ's
   address: Mäster Johansgatan 13, Malmö
@@ -63,12 +81,18 @@ restaurants:
   lon: 12.9975
   hours: Mon–Fri 11:30–14:00
   includes: Salad, bread, coffee and cake included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/mjs/lunch
 - id: sture
   name: Sture
   address: Adelgatan 13, Malmö
   lat: 55.60736
   lon: 13.00044
   hours: Mon–Fri 11:30–15:30
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/brasserie-sture-1912/lunch
 - id: kol
   name: KOL & Cocktails
   address: Kalendegatan 16, Malmö
@@ -76,6 +100,9 @@ restaurants:
   lon: 13.00325
   hours: Mon–Fri 11:30–14:00
   includes: Salad, bread and coffee included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/kol-cocktails-malmo/lunch
 - id: spoonery
   name: Spoonery Gamla Väster
   address: Västergatan 11, Malmö
@@ -90,6 +117,9 @@ restaurants:
   lon: 13.00061
   hours: Mon–Fri 11:00–15:00
   includes: Salad, bread and coffee included
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/gustav-adolf/lunch
 - id: masala
   name: Masala Kitchen & Bar
   address: Norra Vallgatan 78, Malmö
@@ -99,12 +129,18 @@ restaurants:
   includes: Naan, salad and water included
   menu_source: https://masalakitchen.se/lunch/
   note: Indian; drop-in only at lunch
+  source:
+    type: link
+    url: https://masalakitchen.se/lunch/
 - id: sushiyama
   name: Sushi Yama Hansa
   address: Malmborgsgatan 1, Malmö
   lat: 55.60328
   lon: 13.00309
   hours: Daily from 10:00
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/sushi-yama-hansa/lunch
 - id: rosegarden
   name: Rosegarden
   address: Stora Nygatan 59, Malmö
@@ -112,6 +148,14 @@ restaurants:
   lon: 12.99749
   hours: Mon–Fri 11:30–15:00
   includes: Soft drinks, coffee and tea included
+  source:
+    type: static
+    url: https://www.menydags.se/restaurang/rosegarden-stora-nygatan/lunch
+    dishes:
+    - name: Lunchbuffé
+      desc: Kinesiskt, thailändskt, sushi, pho, dim sum, sallad och lite sött efter maten
+      kind: buffet
+      price: 155
 - id: bistroroyal
   name: Bistro Royal
   address: Centralplan 8 (Malmö C), Malmö
@@ -119,12 +163,18 @@ restaurants:
   lon: 13.00085
   hours: Mon–Fri 11:00–15:00
   includes: Ice water included; takeaway 10 kr less
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/bistro-royal/lunch
 - id: tipico
   name: Tipico
   address: Lilla Nygatan 11, Malmö
   lat: 55.6024
   lon: 13.00205
   hours: Mon–Fri 11:30–14:00
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/tipico/lunch
 - id: benne
   name: benne
   address: Malmborgsgatan 6, Malmö
@@ -134,6 +184,9 @@ restaurants:
   includes: No lunch deal published
   menu_source: https://bennepastabar.se/
   favourite: true
+  source:
+    type: link
+    url: https://bennepastabar.se/
 - id: dazio
   name: Da Zio
   address: Stora Nygatan 44, Malmö
@@ -147,6 +200,14 @@ restaurants:
   lon: 13.00506
   hours: Mon–Fri 11:30–14:00
   includes: Salad buffet and coffee included
+  source:
+    type: static
+    url: https://www.menydags.se/restaurang/ostergatan-no25/lunch
+    dishes:
+    - name: Lunchbuffé
+      desc: Pizza, pasta, lasagne och salladsbuffé
+      kind: buffet
+      price: 129
 - id: vibliotek
   name: Vibliotek
   address: Södra Vallgatan 3, Malmö
@@ -154,6 +215,9 @@ restaurants:
   lon: 13.00126
   hours: Lunch 11:30–14:30
   includes: Salad, bread and coffee included
+  source:
+    type: mylunch
+    url: https://www.mylunch.se/malmo/vibliotek/lunch/
 - id: tugg
   name: Tugg Burgers
   address: Södra Vallgatan 3, Malmö
@@ -161,6 +225,9 @@ restaurants:
   lon: 13.00126
   hours: 11:00–15:00
   includes: Fries, coffee and water included
+  source:
+    type: mylunch
+    url: https://www.mylunch.se/malmo/tugg-burgers/lunch/
 - id: edda
   name: Edda
   address: Erik Dahlbergsgatan 5, Malmö
@@ -169,6 +236,9 @@ restaurants:
   hours: Tue–Sat (lunch hours not published)
   menu_source: https://www.instagram.com/eddamalmo
   note: Lunch menu is posted on Instagram only
+  source:
+    type: link
+    url: https://www.instagram.com/eddamalmo
 - id: saltimporten-canteen
   name: saltimporten canteen
   address: Grimsbygatan 24, Malmö
@@ -177,3 +247,6 @@ restaurants:
   hours: Mon–Fri 11:00–14:00
   menu_source: https://www.saltimporten.com/
   favourite: true
+  source:
+    type: menydags
+    url: https://www.menydags.se/restaurang/saltimporten-canteen/lunch
