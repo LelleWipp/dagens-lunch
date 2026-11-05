@@ -2,155 +2,218 @@
 // JSON contract: see "JSON-kontraktet" in CLAUDE.md.
 (function () {
   "use strict";
-  const $ = (s) => document.querySelector(s);
+  const $ = (selector) => document.querySelector(selector);
+
+  // Fallbacks used when menus.json omits a value (config.yaml normally provides them).
+  const DEFAULT_WALK_SPEED_M_PER_MIN = 80;
+  const DEFAULT_RADIUS_M = 500;
+  // Straight-line distance × ROUTE_FACTOR approximates the walking route.
+  const ROUTE_FACTOR = 1.3;
+  // Sort keys for restaurants without a distance / dishes without a price: sort them last.
+  const UNKNOWN_DISTANCE = 99999;
+  const UNKNOWN_PRICE = 9999;
   const state = { data: null, kinds: new Set(), sort: "dist", q: "" };
 
   try {
-    const s = JSON.parse(localStorage.getItem("lunch.prefs") || "{}");
-    if (s.sort === "dist" || s.sort === "price") state.sort = s.sort;
-    (s.kinds || []).forEach((k) => state.kinds.add(k));
-  } catch (e) { /* storage unavailable */ }
+    const saved = JSON.parse(localStorage.getItem("lunch.prefs") || "{}");
+    if (saved.sort === "dist" || saved.sort === "price") state.sort = saved.sort;
+    (saved.kinds || []).forEach((kind) => state.kinds.add(kind));
+  } catch (err) { /* storage unavailable */ }
   function savePrefs() {
-    try { localStorage.setItem("lunch.prefs", JSON.stringify({ sort: state.sort, kinds: [...state.kinds] })); } catch (e) { /* ignore */ }
+    try { localStorage.setItem("lunch.prefs", JSON.stringify({ sort: state.sort, kinds: [...state.kinds] })); } catch (err) { /* ignore */ }
   }
 
   // Dates in the office's time zone (Sweden).
-  const fmt = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Stockholm", year: "numeric", month: "2-digit", day: "2-digit" });
-  const today = fmt.format(new Date());
-  const dow = new Date(today + "T12:00:00Z").getUTCDay();
-  const isWeekend = dow === 0 || dow === 6;
-  function isoWeek(d) {
-    const t = new Date(d + "T12:00:00Z"); const day = (t.getUTCDay() + 6) % 7;
-    t.setUTCDate(t.getUTCDate() - day + 3); const f = new Date(Date.UTC(t.getUTCFullYear(), 0, 4));
-    return 1 + Math.round(((t - f) / 864e5 - 3 + ((f.getUTCDay() + 6) % 7)) / 7);
+  const ymdFormat = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Stockholm", year: "numeric", month: "2-digit", day: "2-digit" });
+  const today = ymdFormat.format(new Date());
+  const dayOfWeek = new Date(today + "T12:00:00Z").getUTCDay();
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  // ISO 8601 week number for a YYYY-MM-DD date (weeks start Monday; week 1 contains 4 January).
+  function isoWeek(ymd) {
+    const date = new Date(ymd + "T12:00:00Z"); const weekday = (date.getUTCDay() + 6) % 7;
+    date.setUTCDate(date.getUTCDate() - weekday + 3); const jan4 = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+    return 1 + Math.round(((date - jan4) / 864e5 - 3 + ((jan4.getUTCDay() + 6) % 7)) / 7);
   }
-  const longDate = (d) => new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+  const longDate = (ymd) => new Date(ymd + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
   $("#dateline").textContent = longDate(today) + " · week " + isoWeek(today);
 
-  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const speed = () => (state.data && state.data.walk_speed_m_per_min) || 80;
-  // Straight-line distance × 1.3 approximates the walking route.
-  const walk = (m) => Math.max(1, Math.ceil((m * 1.3) / speed()));
-  const distKey = (r) => (typeof r.distance_m === "number" ? r.distance_m : 99999);
-  const isUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
+  const esc = (value) => String(value ?? "").replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  const walkSpeed = () => (state.data && state.data.walk_speed_m_per_min) || DEFAULT_WALK_SPEED_M_PER_MIN;
+  const walkMinutes = (meters) => Math.max(1, Math.ceil((meters * ROUTE_FACTOR) / walkSpeed()));
+  const hasDistance = (restaurant) => typeof restaurant.distance_m === "number";
+  const distanceSortKey = (restaurant) => (hasDistance(restaurant) ? restaurant.distance_m : UNKNOWN_DISTANCE);
+  const compareDistance = (a, b) => distanceSortKey(a) - distanceSortKey(b);
+  const isUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
 
-  function distHTML(r) {
-    if (typeof r.distance_m !== "number") return "<b>—</b><span>distance pending</span>";
-    return "<b>" + r.distance_m + " m</b><span>" + walk(r.distance_m) + " min walk</span>";
+  // Shared HTML fragments for menu cards and the "no menu online" list.
+  const metersHTML = (restaurant) => (hasDistance(restaurant) ? restaurant.distance_m + " m" : "");
+  const metaLineHTML = (restaurant) => '<div class="meta">' + esc(restaurant.address) + (restaurant.hours ? " · " + esc(restaurant.hours) : "") + "</div>";
+  // Today's note from the menu entry wins over the static "includes" text from config.yaml.
+  const extraInfo = (restaurant, entry) => (entry && entry.note) || restaurant.includes;
+  function favouriteTagHTML(restaurant, withTooltip) {
+    if (!restaurant.favourite) return "";
+    const title = withTooltip ? ' title="' + esc(restaurant.note || "Added by the office") + '"' : "";
+    return '<span class="tag fav"' + title + ">Office favourite</span>";
   }
-  function menuLink(r, e) {
-    const u = r.menu_source || (e && e.source);
-    if (!isUrl(u)) return "";
-    return '<div class="meta"><a href="' + esc(u) + '" target="_blank" rel="noopener">' +
-      (/instagram\.com/i.test(u) ? "Lunch menu on Instagram ↗" : "Menu source ↗") + "</a></div>";
+  function externalLinkHTML(url, label, className) {
+    const cls = className ? ' class="' + className + '"' : "";
+    return "<a" + cls + ' href="' + esc(url) + '" target="_blank" rel="noopener">' + label + "</a>";
   }
+
+  function distanceHTML(restaurant) {
+    if (!hasDistance(restaurant)) return "<b>—</b><span>distance pending</span>";
+    return "<b>" + metersHTML(restaurant) + "</b><span>" + walkMinutes(restaurant.distance_m) + " min walk</span>";
+  }
+  function menuLinkHTML(restaurant, entry) {
+    const url = restaurant.menu_source || (entry && entry.source);
+    if (!isUrl(url)) return "";
+    let label = "Menu source ↗";
+    if (/instagram\.com/i.test(url)) label = "Lunch menu on Instagram ↗";
+    else if (entry && entry.status === "link") label = "Today’s menu ↗";
+    return '<div class="meta">' + externalLinkHTML(url, label) + "</div>";
+  }
+  // status "error" means the scraper failed for this source today, which is not the same as "no menu published".
+  const fetchFailedTagHTML = (entry) =>
+    entry && entry.status === "error" ? '<span class="tag warn" title="The menu source could not be read this morning">Couldn’t fetch today</span>' : "";
   function minPrice(dishes) {
-    const ps = dishes.map((d) => d.price).filter((p) => typeof p === "number");
-    return ps.length ? Math.min(...ps) : null;
+    const prices = dishes.map((dish) => dish.price).filter((price) => typeof price === "number");
+    return prices.length ? Math.min(...prices) : null;
   }
 
   // controls
-  document.querySelectorAll(".chip").forEach((b) => {
-    b.setAttribute("aria-pressed", state.kinds.has(b.dataset.kind));
-    b.addEventListener("click", () => {
-      const k = b.dataset.kind;
-      state.kinds.has(k) ? state.kinds.delete(k) : state.kinds.add(k);
-      b.setAttribute("aria-pressed", state.kinds.has(k));
+  document.querySelectorAll(".chip").forEach((chip) => {
+    chip.setAttribute("aria-pressed", state.kinds.has(chip.dataset.kind));
+    chip.addEventListener("click", () => {
+      const kind = chip.dataset.kind;
+      state.kinds.has(kind) ? state.kinds.delete(kind) : state.kinds.add(kind);
+      chip.setAttribute("aria-pressed", state.kinds.has(kind));
       savePrefs(); render();
     });
   });
-  document.querySelectorAll(".seg button").forEach((b) => {
-    b.setAttribute("aria-pressed", b.dataset.sort === state.sort);
-    b.addEventListener("click", () => {
-      state.sort = b.dataset.sort;
-      document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  document.querySelectorAll(".seg button").forEach((sortButton) => {
+    sortButton.setAttribute("aria-pressed", sortButton.dataset.sort === state.sort);
+    sortButton.addEventListener("click", () => {
+      state.sort = sortButton.dataset.sort;
+      document.querySelectorAll(".seg button").forEach((other) => other.setAttribute("aria-pressed", other === sortButton));
       savePrefs(); render();
     });
   });
-  $("#q").addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); render(); });
+  $("#q").addEventListener("input", (event) => { state.q = event.target.value.trim().toLowerCase(); render(); });
 
-  function renderHeader(d) {
-    const o = d.office || {};
-    document.title = "Dagens lunch" + (o.name ? " · " + o.name : "");
-    const where = [o.name, o.address].filter(Boolean).join(", ");
-    $("#subline").textContent = d.restaurants.length + " lunch spots within " + (o.radius_m || 500) + " m of " + (where || "the office") + ".";
-    $("#distnote").textContent = "Distances are straight-line from " + (o.address || "the office") + "; walking time assumes " + speed() + " m/min.";
-    if (d.updated_at) {
-      const t = new Date(d.updated_at);
-      $("#stamp").innerHTML = "Menus updated<br>" + esc(t.toLocaleString("en-GB", { timeZone: "Europe/Stockholm", weekday: "short", hour: "2-digit", minute: "2-digit" }));
+  function renderHeader(data) {
+    const office = data.office || {};
+    document.title = "Dagens lunch" + (office.name ? " · " + office.name : "");
+    const where = [office.name, office.address].filter(Boolean).join(", ");
+    const radius = office.radius_m || DEFAULT_RADIUS_M;
+    // config.yaml may list favourites beyond the radius; count them separately so the sentence stays true.
+    const further = data.restaurants.filter((restaurant) => hasDistance(restaurant) && restaurant.distance_m > radius).length;
+    $("#subline").textContent = (data.restaurants.length - further) + " lunch spots within " + radius + " m of " + (where || "the office") +
+      (further ? ", plus " + further + " further away." : ".");
+    $("#distnote").textContent = "Distances are straight-line from " + (office.address || "the office") + "; walking time assumes " + walkSpeed() + " m/min.";
+    if (data.updated_at) {
+      const updatedAt = new Date(data.updated_at);
+      $("#stamp").innerHTML = "Menus updated<br>" + esc(updatedAt.toLocaleString("en-GB", { timeZone: "Europe/Stockholm", weekday: "short", hour: "2-digit", minute: "2-digit" }));
     }
-    const n = $("#notice");
+    const notice = $("#notice");
     if (isWeekend) {
-      n.hidden = false;
-      n.innerHTML = "<span>It’s the weekend, so most places don’t serve dagens lunch. Showing the latest weekday menus.</span>";
-    } else if (d.date !== today) {
-      n.hidden = false;
-      n.innerHTML = "<span><b>Today’s menus aren’t in yet.</b> They’re collected every weekday morning. Showing " + esc(longDate(d.date)) + " for now.</span>";
-    } else n.hidden = true;
+      notice.hidden = false;
+      notice.innerHTML = "<span>It’s the weekend, so most places don’t serve dagens lunch. Showing the latest weekday menus.</span>";
+    } else if (data.date !== today) {
+      notice.hidden = false;
+      notice.innerHTML = "<span><b>Today’s menus aren’t in yet.</b> They’re collected every weekday morning. Showing " + esc(longDate(data.date)) + " for now.</span>";
+    } else notice.hidden = true;
   }
 
-  function cardHTML(r, e, dishes) {
-    const tags = (r.favourite ? '<span class="tag fav" title="' + esc(r.note || "Added by the office") + '">Office favourite</span>' : "") +
-      (e.status === "standing" ? '<span class="tag warn" title="No dated menu for today was published; these dishes are on the menu every day">Standing menu</span>' : "");
-    const dishHTML = dishes.map((d) =>
-      '<li><span class="dot k-' + esc(d.kind || "other") + '"></span><div style="min-width:0"><div class="dname">' + esc(d.name) + "</div>" +
-      (d.desc ? '<div class="ddesc">' + esc(d.desc) + "</div>" : "") + "</div>" +
-      '<span class="price">' + (typeof d.price === "number" ? d.price + " kr" : esc(d.price || "")) + "</span></li>").join("");
-    const incl = e.note || r.includes;
-    return '<article class="card" data-id="' + esc(r.id) + '">' +
-      '<div class="chead"><div style="min-width:0"><h3>' + esc(r.name) + '</h3><div class="meta">' + esc(r.address) + (r.hours ? " · " + esc(r.hours) : "") + "</div></div>" +
-      '<div class="dist">' + distHTML(r) + "</div></div>" +
+  function dishHTML(dish) {
+    const price = typeof dish.price === "number" ? dish.price + " kr" : esc(dish.price || "");
+    return '<li><span class="dot k-' + esc(dish.kind || "other") + '"></span><div class="shrink"><div class="dname">' + esc(dish.name) + "</div>" +
+      (dish.desc ? '<div class="ddesc">' + esc(dish.desc) + "</div>" : "") + "</div>" +
+      '<span class="price">' + price + "</span></li>";
+  }
+
+  function cardHTML(restaurant, entry, dishes) {
+    const tags = favouriteTagHTML(restaurant, true) +
+      (entry.status === "standing" ? '<span class="tag warn" title="No dated menu for today was published; these dishes are on the menu every day">Standing menu</span>' : "");
+    const extra = extraInfo(restaurant, entry);
+    return '<article class="card" data-id="' + esc(restaurant.id) + '">' +
+      '<div class="chead"><div class="shrink"><h3>' + esc(restaurant.name) + "</h3>" + metaLineHTML(restaurant) + "</div>" +
+      '<div class="dist">' + distanceHTML(restaurant) + "</div></div>" +
       (tags ? '<div class="tags">' + tags + "</div>" : "") +
-      '<ul class="dishes">' + dishHTML + "</ul>" +
-      (incl ? '<div class="incl">' + esc(incl) + "</div>" : "") +
-      (isUrl(e.source) ? '<div class="cfoot"><a class="src" href="' + esc(e.source) + '" target="_blank" rel="noopener">Source ↗</a></div>' : "") +
+      '<ul class="dishes">' + dishes.map(dishHTML).join("") + "</ul>" +
+      (extra ? '<div class="incl">' + esc(extra) + "</div>" : "") +
+      (isUrl(entry.source) ? '<div class="cfoot">' + externalLinkHTML(entry.source, "Source ↗", "src") + "</div>" : "") +
       "</article>";
   }
 
-  function render() {
-    const d = state.data;
-    if (!d) return;
-    renderHeader(d);
-    const list = $("#list");
-    if (!d.restaurants.length) { list.innerHTML = '<div class="empty">No restaurants listed yet. Add some to config.yaml.</div>'; return; }
+  const hasMenu = (entry) => Boolean(entry) && (entry.status === "today" || entry.status === "standing") && (entry.dishes || []).length > 0;
 
-    const withMenu = [], without = [];
-    for (const r of d.restaurants) {
-      const e = (d.items || {})[r.id];
-      if (e && (e.status === "today" || e.status === "standing") && (e.dishes || []).length) withMenu.push([r, e]);
-      else without.push([r, e]);
+  // Splits restaurants into those with a menu to show as cards and those listed under "No menu online".
+  function partitionByMenu(data) {
+    const withMenu = [], withoutMenu = [];
+    for (const restaurant of data.restaurants) {
+      const entry = (data.items || {})[restaurant.id];
+      (hasMenu(entry) ? withMenu : withoutMenu).push({ restaurant, entry });
     }
+    return { withMenu, withoutMenu };
+  }
 
-    const rows = withMenu.map(([r, e]) => {
-      let dishes = e.dishes;
-      if (state.kinds.size) dishes = dishes.filter((x) => state.kinds.has(x.kind));
-      if (state.q) dishes = dishes.filter((x) => (x.name + " " + (x.desc || "")).toLowerCase().includes(state.q) || r.name.toLowerCase().includes(state.q));
-      return { r, e, dishes };
-    }).filter((x) => x.dishes.length);
+  // Dishes that pass the active kind filters and search query (a restaurant-name match keeps all its dishes).
+  function filterDishes(restaurant, dishes) {
+    let visible = dishes;
+    if (state.kinds.size) visible = visible.filter((dish) => state.kinds.has(dish.kind));
+    if (state.q) visible = visible.filter((dish) => (dish.name + " " + (dish.desc || "")).toLowerCase().includes(state.q) || restaurant.name.toLowerCase().includes(state.q));
+    return visible;
+  }
 
-    const byDist = (a, b) => distKey(a.r) - distKey(b.r);
-    rows.sort(state.sort === "price" ? (a, b) => (minPrice(a.dishes) ?? 9999) - (minPrice(b.dishes) ?? 9999) || byDist(a, b) : byDist);
+  function sortRows(rows) {
+    const byDistance = (a, b) => compareDistance(a.restaurant, b.restaurant);
+    const byPrice = (a, b) => (minPrice(a.dishes) ?? UNKNOWN_PRICE) - (minPrice(b.dishes) ?? UNKNOWN_PRICE) || byDistance(a, b);
+    return rows.sort(state.sort === "price" ? byPrice : byDistance);
+  }
 
-    list.innerHTML = rows.length
-      ? '<div class="grid">' + rows.map(({ r, e, dishes }) => cardHTML(r, e, dishes)).join("") + "</div>"
+  function renderMenuGrid(withMenu) {
+    const rows = withMenu
+      .map(({ restaurant, entry }) => ({ restaurant, entry, dishes: filterDishes(restaurant, entry.dishes) }))
+      .filter((row) => row.dishes.length);
+    sortRows(rows);
+    $("#list").innerHTML = rows.length
+      ? '<div class="grid">' + rows.map((row) => cardHTML(row.restaurant, row.entry, row.dishes)).join("") + "</div>"
       : '<div class="empty">No dishes match these filters. Clear a filter to see more.</div>';
+  }
 
+  function noMenuItemHTML(restaurant, entry) {
+    const extra = extraInfo(restaurant, entry);
+    const tags = favouriteTagHTML(restaurant, false) + fetchFailedTagHTML(entry);
+    return '<div class="nitem"><div class="row"><b>' + esc(restaurant.name) + '</b><span class="price">' + metersHTML(restaurant) + "</span></div>" +
+      (tags ? '<div class="tags">' + tags + "</div>" : "") +
+      metaLineHTML(restaurant) +
+      (extra ? '<div class="meta">' + esc(extra) + "</div>" : "") + menuLinkHTML(restaurant, entry) + "</div>";
+  }
+
+  function renderNoMenuList(withoutMenu) {
     const box = $("#nomenuBox");
-    if (!without.length) { box.hidden = true; return; }
+    if (!withoutMenu.length) { box.hidden = true; return; }
     box.hidden = false;
-    $("#nomenuSum").textContent = "No menu online (" + without.length + ")";
-    without.sort((a, b) => distKey(a[0]) - distKey(b[0]));
-    $("#nlist").innerHTML = without.map(([r, e]) => {
-      const note = (e && e.note) || r.includes;
-      return '<div class="nitem"><div class="row"><b>' + esc(r.name) + '</b><span class="price">' + (typeof r.distance_m === "number" ? r.distance_m + " m" : "") + "</span></div>" +
-        (r.favourite ? '<div><span class="tag fav">Office favourite</span></div>' : "") +
-        '<div class="meta">' + esc(r.address || "") + (r.hours ? " · " + esc(r.hours) : "") + "</div>" +
-        (note ? '<div class="meta">' + esc(note) + "</div>" : "") + menuLink(r, e) + "</div>";
-    }).join("");
+    $("#nomenuSum").textContent = "No menu online (" + withoutMenu.length + ")";
+    withoutMenu.sort((a, b) => compareDistance(a.restaurant, b.restaurant));
+    $("#nlist").innerHTML = withoutMenu.map((row) => noMenuItemHTML(row.restaurant, row.entry)).join("");
+  }
+
+  // Re-renders the restaurant lists; called on load and whenever a filter, sort or search changes.
+  function render() {
+    const data = state.data;
+    if (!data) return;
+    if (!data.restaurants.length) {
+      $("#list").innerHTML = '<div class="empty">No restaurants listed yet. Add some to config.yaml.</div>';
+      return;
+    }
+    const { withMenu, withoutMenu } = partitionByMenu(data);
+    renderMenuGrid(withMenu);
+    renderNoMenuList(withoutMenu);
   }
 
   fetch("data/menus.json", { cache: "no-cache" })
     .then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })
-    .then((data) => { state.data = data; render(); })
+    .then((data) => { state.data = data; renderHeader(data); render(); })
     .catch(() => { $("#list").innerHTML = '<div class="empty">Couldn’t load today’s menus. Try reloading the page.</div>'; });
 })();
