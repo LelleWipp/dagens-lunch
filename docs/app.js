@@ -145,6 +145,40 @@
       "</article>";
   }
 
+  // Boundary check for menus.json. CLAUDE.md: "En källa som går sönder får aldrig stoppa de andra" –
+  // so one malformed restaurant or menu entry is logged and degraded here instead of breaking the page.
+  function normalizeEntry(id, entry) {
+    if (!entry || typeof entry !== "object") {
+      console.warn("menus.json: entry for", id, "is not an object; showing it as status error");
+      return { status: "error" };
+    }
+    if (entry.dishes === undefined) return entry;
+    if (!Array.isArray(entry.dishes)) {
+      console.warn("menus.json: dishes for", id, "is not a list; showing it as status error");
+      return { ...entry, status: "error", dishes: [] };
+    }
+    const dishes = entry.dishes.filter((dish) => dish && typeof dish.name === "string" && dish.name);
+    if (dishes.length !== entry.dishes.length) console.warn("menus.json: dropped", entry.dishes.length - dishes.length, "dish(es) without a name for", id);
+    return dishes.length === entry.dishes.length ? entry : { ...entry, dishes };
+  }
+
+  function normalizeMenus(raw) {
+    if (!raw || !Array.isArray(raw.restaurants)) throw new Error("menus.json has no restaurants list");
+    const rawItems = raw.items && typeof raw.items === "object" ? raw.items : {};
+    const restaurants = [], items = {};
+    for (const restaurant of raw.restaurants) {
+      if (!restaurant || typeof restaurant.id !== "string" || !restaurant.id) {
+        console.warn("menus.json: skipped a restaurant without an id", restaurant);
+        continue;
+      }
+      const hasName = typeof restaurant.name === "string" && restaurant.name;
+      if (!hasName) console.warn("menus.json: restaurant", restaurant.id, "has no name; using its id");
+      restaurants.push(hasName ? restaurant : { ...restaurant, name: restaurant.id });
+      if (rawItems[restaurant.id] !== undefined) items[restaurant.id] = normalizeEntry(restaurant.id, rawItems[restaurant.id]);
+    }
+    return { ...raw, restaurants, items };
+  }
+
   const hasMenu = (entry) => Boolean(entry) && (entry.status === "today" || entry.status === "standing") && (entry.dishes || []).length > 0;
 
   // Splits restaurants into those with a menu to show as cards and those listed under "No menu online".
@@ -214,6 +248,6 @@
 
   fetch("data/menus.json", { cache: "no-cache" })
     .then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })
-    .then((data) => { state.data = data; renderHeader(data); render(); })
+    .then((raw) => { const data = normalizeMenus(raw); state.data = data; renderHeader(data); render(); })
     .catch(() => { $("#list").innerHTML = '<div class="empty">Couldn’t load today’s menus. Try reloading the page.</div>'; });
 })();
