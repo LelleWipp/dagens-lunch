@@ -67,8 +67,14 @@
   function menuLinkHTML(restaurant, entry) {
     const url = restaurant.menu_source || (entry && entry.source);
     if (!isUrl(url)) return "";
-    return '<div class="meta">' + externalLinkHTML(url, /instagram\.com/i.test(url) ? "Lunch menu on Instagram ↗" : "Menu source ↗") + "</div>";
+    let label = "Menu source ↗";
+    if (/instagram\.com/i.test(url)) label = "Lunch menu on Instagram ↗";
+    else if (entry && entry.status === "link") label = "Today’s menu ↗";
+    return '<div class="meta">' + externalLinkHTML(url, label) + "</div>";
   }
+  // status "error" means the scraper failed for this source today, which is not the same as "no menu published".
+  const fetchFailedTagHTML = (entry) =>
+    entry && entry.status === "error" ? '<span class="tag warn" title="The menu source could not be read this morning">Couldn’t fetch today</span>' : "";
   function minPrice(dishes) {
     const prices = dishes.map((dish) => dish.price).filter((price) => typeof price === "number");
     return prices.length ? Math.min(...prices) : null;
@@ -173,8 +179,9 @@
 
   function noMenuItemHTML(restaurant, entry) {
     const extra = extraInfo(restaurant, entry);
+    const tags = favouriteTagHTML(restaurant, false) + fetchFailedTagHTML(entry);
     return '<div class="nitem"><div class="row"><b>' + esc(restaurant.name) + '</b><span class="price">' + metersHTML(restaurant) + "</span></div>" +
-      (restaurant.favourite ? "<div>" + favouriteTagHTML(restaurant, false) + "</div>" : "") +
+      (tags ? '<div class="tags">' + tags + "</div>" : "") +
       metaLineHTML(restaurant) +
       (extra ? '<div class="meta">' + esc(extra) + "</div>" : "") + menuLinkHTML(restaurant, entry) + "</div>";
   }
