@@ -1,6 +1,6 @@
 {
   "date": "2026-11-05",
-  "updated_at": "2026-11-05T11:21:38+01:00",
+  "updated_at": "2026-11-05T11:23:58+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -293,7 +293,7 @@
         },
         {
           "name": "Ostron legris & xipister",
-          "kind": "other"
+          "kind": "fish"
         },
         {
           "name": "Rosette de lyon",
@@ -315,7 +315,7 @@
         },
         {
           "name": "Lardo & sardeller på grillat bröd",
-          "kind": "other",
+          "kind": "fish",
           "price": 110
         },
         {
@@ -413,7 +413,7 @@
         {
           "name": "Meat of the Week",
           "desc": "Konfiterat anklår, potatispuré, ciderbrässerad savoykål, rödvinssky",
-          "kind": "other",
+          "kind": "meat",
           "price": 170
         },
         {
@@ -727,7 +727,7 @@
         {
           "name": "Focaccia Parma",
           "desc": "Parmaskinka, pesto, buffelmozzarella, basilika och tomat",
-          "kind": "buffet",
+          "kind": "meat",
           "price": 130
         },
         {
@@ -794,7 +794,7 @@
         {
           "name": "Gris",
           "desc": "Pita, avokado, pico de gallo",
-          "kind": "other"
+          "kind": "meat"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
