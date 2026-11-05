@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- menus.json holds text scraped from restaurant sites and is rendered with innerHTML (escaped by esc()).
+     This policy is a second line of defence: only our own script, styles and data may load, and inline
+     scripts/event handlers are refused even if an unescaped value ever slips through. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <title>Dagens lunch</title>
 <meta name="description" content="Today's lunch menus near the office, updated every weekday morning.">
 <link rel="stylesheet" href="style.css">
