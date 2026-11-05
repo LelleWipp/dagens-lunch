@@ -97,9 +97,11 @@ krävde ett eget ja.
   agentens miljö med varierande timing, så skärmdumparna skilde sig mellan körningar. Det
   krävdes tre försök för att blockera dem stabilt. Det slutade med CDP:s `Fetch`-domän och en
   tolerans för brus i textkanterna.
-- **Steg 1 gick förlorat en gång.** När baslinjen gjordes om från `main` återställde en
-  `git checkout` den ändrade CSS-filen innan den hade committats. Agenten upptäckte det på
-  att `git status` var tom och gjorde om steget.
+- **Steg 1 gick förlorat en gång.** När baslinjen gjordes om från `main` lades den
+  ocommittade CSS-ändringen i en `git stash`, och den plockades aldrig tillbaka. Agenten såg
+  att `git status` var tom och gjorde om steget. Först i Del B, när `git stash list` visade
+  den gamla stashen, förstod agenten den verkliga orsaken. Den hade först skyllt på en
+  `git checkout`.
 - **Testdatan täckte inte alla kodvägar.** Den riktiga datan har ingen favorit utan
   meny, ingen restaurang utan avstånd och ingen `error`-status. Det upptäcktes först i
   steg 3. Då lades påhittad kantfallsdata till, och baslinjen gjordes om från `main`. Steg 1–2
