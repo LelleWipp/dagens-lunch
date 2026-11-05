@@ -87,7 +87,7 @@
       const kind = chip.dataset.kind;
       state.kinds.has(kind) ? state.kinds.delete(kind) : state.kinds.add(kind);
       chip.setAttribute("aria-pressed", state.kinds.has(kind));
-      savePrefs(); render();
+      savePrefs(); renderSafely();
     });
   });
   document.querySelectorAll(".seg button").forEach((sortButton) => {
@@ -95,10 +95,10 @@
     sortButton.addEventListener("click", () => {
       state.sort = sortButton.dataset.sort;
       document.querySelectorAll(".seg button").forEach((other) => other.setAttribute("aria-pressed", other === sortButton));
-      savePrefs(); render();
+      savePrefs(); renderSafely();
     });
   });
-  $("#q").addEventListener("input", (event) => { state.q = event.target.value.trim().toLowerCase(); render(); });
+  $("#q").addEventListener("input", (event) => { state.q = event.target.value.trim().toLowerCase(); renderSafely(); });
 
   function renderHeader(data) {
     const office = data.office || {};
@@ -246,8 +246,32 @@
     renderNoMenuList(withoutMenu);
   }
 
-  fetch("data/menus.json", { cache: "no-cache" })
-    .then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })
-    .then((raw) => { const data = normalizeMenus(raw); state.data = data; renderHeader(data); render(); })
-    .catch(() => { $("#list").innerHTML = '<div class="empty">Couldn’t load today’s menus. Try reloading the page.</div>'; });
+  // Loading and rendering fail for different reasons: an unreachable or invalid menus.json is a data
+  // problem the visitor can retry, an exception while rendering is a bug. Both are logged with the cause.
+  const LOAD_FAILED = "Couldn’t load today’s menus. Try reloading the page.";
+  const RENDER_FAILED = "Something went wrong showing the menus. The details are in the browser console.";
+  function showError(message, err) {
+    console.error(message, err);
+    $("#list").innerHTML = '<div class="empty">' + esc(message) + "</div>";
+  }
+  function renderSafely() {
+    try { render(); } catch (err) { showError(RENDER_FAILED, err); }
+  }
+
+  async function loadMenus() {
+    const response = await fetch("data/menus.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error("data/menus.json: HTTP " + response.status);
+    let raw;
+    try { raw = await response.json(); } catch (err) { throw new Error("data/menus.json is not valid JSON: " + err.message); }
+    return normalizeMenus(raw);
+  }
+
+  loadMenus().then(
+    (data) => {
+      state.data = data;
+      try { renderHeader(data); } catch (err) { showError(RENDER_FAILED, err); return; }
+      renderSafely();
+    },
+    (err) => showError(LOAD_FAILED, err),
+  );
 })();
