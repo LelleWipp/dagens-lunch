@@ -6,9 +6,6 @@ on:
     # Off the full hour on purpose: GitHub delays scheduled runs at :00.
     - cron: "47 8 * * 1-5"
   workflow_dispatch:
-  push: # TEMPORARY: real runs on the PR branch before merge; removed before merging
-    branches: [feat/scraper]
-    paths: [".github/workflows/scrape.yml"]
 
 permissions:
   contents: write # commit menus.json
