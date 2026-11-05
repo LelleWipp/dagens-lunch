@@ -116,7 +116,7 @@
 
   function dishHTML(dish) {
     const price = typeof dish.price === "number" ? dish.price + " kr" : esc(dish.price || "");
-    return '<li><span class="dot k-' + esc(dish.kind || "other") + '"></span><div style="min-width:0"><div class="dname">' + esc(dish.name) + "</div>" +
+    return '<li><span class="dot k-' + esc(dish.kind || "other") + '"></span><div class="shrink"><div class="dname">' + esc(dish.name) + "</div>" +
       (dish.desc ? '<div class="ddesc">' + esc(dish.desc) + "</div>" : "") + "</div>" +
       '<span class="price">' + price + "</span></li>";
   }
@@ -126,7 +126,7 @@
       (entry.status === "standing" ? '<span class="tag warn" title="No dated menu for today was published; these dishes are on the menu every day">Standing menu</span>' : "");
     const extra = extraInfo(restaurant, entry);
     return '<article class="card" data-id="' + esc(restaurant.id) + '">' +
-      '<div class="chead"><div style="min-width:0"><h3>' + esc(restaurant.name) + "</h3>" + metaLineHTML(restaurant) + "</div>" +
+      '<div class="chead"><div class="shrink"><h3>' + esc(restaurant.name) + "</h3>" + metaLineHTML(restaurant) + "</div>" +
       '<div class="dist">' + distanceHTML(restaurant) + "</div></div>" +
       (tags ? '<div class="tags">' + tags + "</div>" : "") +
       '<ul class="dishes">' + dishes.map(dishHTML).join("") + "</ul>" +
