@@ -6,10 +6,11 @@ Using the structured data instead of CSS classes keeps the parser working when t
 from __future__ import annotations
 
 import json
+import re
 from datetime import date
 from typing import Any
 
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser
 
 from scraper.models import Dish, MenuEntry, Restaurant
 from scraper.normalize import classify_dish, clean_text, parse_price, parse_swedish_day
@@ -17,6 +18,7 @@ from scraper.sources.base import SourceError
 from scraper.sources.http import PoliteClient
 
 _VEGETARIAN_DIETS = ("VegetarianDiet", "VeganDiet")
+_SCRIPT_BODY = re.compile(r"^<script[^>]*>(.*)</script>\s*$", re.DOTALL | re.IGNORECASE)
 
 
 class MenydagsSource:
@@ -43,9 +45,9 @@ def parse_menydags(html: str, day: date, url: str) -> MenuEntry:
 
 
 def _find_menu(html: str) -> dict[str, Any] | None:
-    for node in HTMLParser(html).css('script[type="application/ld+json"]'):
+    for node in LexborHTMLParser(html).css('script[type="application/ld+json"]'):
         try:
-            data = json.loads(node.text(deep=True))
+            data = json.loads(_script_body(node.text(deep=True), node.html or ""))
         except json.JSONDecodeError:
             continue
         candidates = data.get("@graph", [data]) if isinstance(data, dict) else data
@@ -53,6 +55,14 @@ def _find_menu(html: str) -> dict[str, Any] | None:
             if isinstance(candidate, dict) and candidate.get("@type") == "Menu":
                 return candidate
     return None
+
+
+def _script_body(text: str, outer_html: str) -> str:
+    """Script contents; falls back to the raw markup in case the parser keeps script text out of text()."""
+    if text.strip():
+        return text
+    match = _SCRIPT_BODY.match(outer_html.strip())
+    return match.group(1) if match else ""
 
 
 def _dish(item: dict[str, Any]) -> Dish:

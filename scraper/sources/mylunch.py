@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser
 
 from scraper.models import Dish, MenuEntry, Restaurant
 from scraper.normalize import classify_dish, clean_text, parse_price
@@ -26,7 +26,7 @@ class MylunchSource:
 
 
 def parse_mylunch(html: str, day: date, url: str) -> MenuEntry:
-    tree = HTMLParser(html)
+    tree = LexborHTMLParser(html)
     if tree.css_first("#menus") is None:
         raise SourceError("no #menus block on the page; the layout may have changed")
     day_block = tree.css_first(f"#wd{day:%d%m}")
