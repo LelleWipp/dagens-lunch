@@ -3,9 +3,10 @@
   --bg:#F3F5F2; --surface:#FFFFFF; --ink:#1C2621; --muted:#5D6A62; --line:#DCE2DD; --soft:#E9EDE9;
   --accent:#B42D3F; --accent-ink:#FFFFFF; --accent-soft:#F6E3E6;
   --meat:#9C4A2B; --fish:#2C6A8C; --veg:#3F7A34; --buffet:#8A6A16; --other:#6B6F86;
-  --font-display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-  --font-body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  /* System fonts only: the page makes no requests besides data/menus.json. */
+  --font-display:"Helvetica Neue", Arial, sans-serif;
+  --font-body:system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:ui-monospace, Menlo, Consolas, monospace;
   --r:10px;
   color-scheme:light;
 }
