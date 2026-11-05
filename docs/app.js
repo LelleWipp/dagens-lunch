@@ -3,6 +3,15 @@
 (function () {
   "use strict";
   const $ = (s) => document.querySelector(s);
+
+  // Fallbacks used when menus.json omits a value (config.yaml normally provides them).
+  const DEFAULT_WALK_SPEED_M_PER_MIN = 80;
+  const DEFAULT_RADIUS_M = 500;
+  // Straight-line distance × ROUTE_FACTOR approximates the walking route.
+  const ROUTE_FACTOR = 1.3;
+  // Sort keys for restaurants without a distance / dishes without a price: sort them last.
+  const UNKNOWN_DISTANCE = 99999;
+  const UNKNOWN_PRICE = 9999;
   const state = { data: null, kinds: new Set(), sort: "dist", q: "" };
 
   try {
@@ -28,10 +37,9 @@
   $("#dateline").textContent = longDate(today) + " · week " + isoWeek(today);
 
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const speed = () => (state.data && state.data.walk_speed_m_per_min) || 80;
-  // Straight-line distance × 1.3 approximates the walking route.
-  const walk = (m) => Math.max(1, Math.ceil((m * 1.3) / speed()));
-  const distKey = (r) => (typeof r.distance_m === "number" ? r.distance_m : 99999);
+  const speed = () => (state.data && state.data.walk_speed_m_per_min) || DEFAULT_WALK_SPEED_M_PER_MIN;
+  const walk = (m) => Math.max(1, Math.ceil((m * ROUTE_FACTOR) / speed()));
+  const distKey = (r) => (typeof r.distance_m === "number" ? r.distance_m : UNKNOWN_DISTANCE);
   const isUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
 
   function distHTML(r) {
@@ -73,7 +81,7 @@
     const o = d.office || {};
     document.title = "Dagens lunch" + (o.name ? " · " + o.name : "");
     const where = [o.name, o.address].filter(Boolean).join(", ");
-    $("#subline").textContent = d.restaurants.length + " lunch spots within " + (o.radius_m || 500) + " m of " + (where || "the office") + ".";
+    $("#subline").textContent = d.restaurants.length + " lunch spots within " + (o.radius_m || DEFAULT_RADIUS_M) + " m of " + (where || "the office") + ".";
     $("#distnote").textContent = "Distances are straight-line from " + (o.address || "the office") + "; walking time assumes " + speed() + " m/min.";
     if (d.updated_at) {
       const t = new Date(d.updated_at);
@@ -129,7 +137,7 @@
     }).filter((x) => x.dishes.length);
 
     const byDist = (a, b) => distKey(a.r) - distKey(b.r);
-    rows.sort(state.sort === "price" ? (a, b) => (minPrice(a.dishes) ?? 9999) - (minPrice(b.dishes) ?? 9999) || byDist(a, b) : byDist);
+    rows.sort(state.sort === "price" ? (a, b) => (minPrice(a.dishes) ?? UNKNOWN_PRICE) - (minPrice(b.dishes) ?? UNKNOWN_PRICE) || byDist(a, b) : byDist);
 
     list.innerHTML = rows.length
       ? '<div class="grid">' + rows.map(({ r, e, dishes }) => cardHTML(r, e, dishes)).join("") + "</div>"
