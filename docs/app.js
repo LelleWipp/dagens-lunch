@@ -104,7 +104,11 @@
     const office = data.office || {};
     document.title = "Dagens lunch" + (office.name ? " · " + office.name : "");
     const where = [office.name, office.address].filter(Boolean).join(", ");
-    $("#subline").textContent = data.restaurants.length + " lunch spots within " + (office.radius_m || DEFAULT_RADIUS_M) + " m of " + (where || "the office") + ".";
+    const radius = office.radius_m || DEFAULT_RADIUS_M;
+    // config.yaml may list favourites beyond the radius; count them separately so the sentence stays true.
+    const further = data.restaurants.filter((restaurant) => hasDistance(restaurant) && restaurant.distance_m > radius).length;
+    $("#subline").textContent = (data.restaurants.length - further) + " lunch spots within " + radius + " m of " + (where || "the office") +
+      (further ? ", plus " + further + " further away." : ".");
     $("#distnote").textContent = "Distances are straight-line from " + (office.address || "the office") + "; walking time assumes " + walkSpeed() + " m/min.";
     if (data.updated_at) {
       const updatedAt = new Date(data.updated_at);
