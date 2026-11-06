@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-05",
-  "updated_at": "2026-11-05T11:23:58+01:00",
+  "date": "2026-11-06",
+  "updated_at": "2026-11-06T17:21:02+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -277,87 +277,9 @@
       "source": "https://www.menydags.se/restaurang/osaka/lunch"
     },
     "ruths": {
-      "status": "today",
-      "dishes": [
-        {
-          "name": "Luques-oliver",
-          "desc": "Gröna franska oliver",
-          "kind": "other",
-          "price": 85
-        },
-        {
-          "name": "Saltrostade valenciamandlar",
-          "desc": "Mandlar",
-          "kind": "other",
-          "price": 55
-        },
-        {
-          "name": "Ostron legris & xipister",
-          "kind": "fish"
-        },
-        {
-          "name": "Rosette de lyon",
-          "desc": "Fransk salami",
-          "kind": "meat",
-          "price": 85
-        },
-        {
-          "name": "Fiocco di prosciutto",
-          "desc": "Italiensk lufttorkad skinka",
-          "kind": "meat",
-          "price": 175
-        },
-        {
-          "name": "Kycklingterrine",
-          "desc": "Bacon, aprikos & hasselnötter",
-          "kind": "meat",
-          "price": 155
-        },
-        {
-          "name": "Lardo & sardeller på grillat bröd",
-          "kind": "fish",
-          "price": 110
-        },
-        {
-          "name": "Baby gem-sallad",
-          "desc": "Saltbakade gulbetor, vinterrädisor, granatäpplevinaigrette, valnötter & ricotta salata",
-          "kind": "other",
-          "price": 165
-        },
-        {
-          "name": "Chorizo- & kastanjesoppa",
-          "kind": "meat",
-          "price": 165
-        },
-        {
-          "name": "Boudin blanc",
-          "desc": "Potatismos & äpple fyllt med sviskon & rökt sidfläsk",
-          "kind": "meat",
-          "price": 185
-        },
-        {
-          "name": "Hallonsemifreddo & pistagebrittle",
-          "kind": "veg",
-          "price": 125
-        },
-        {
-          "name": "Pumpa- & valnötskaka",
-          "desc": "Med bourbonsmör",
-          "kind": "other",
-          "price": 75
-        },
-        {
-          "name": "Chokladkaka & vispad grädde",
-          "kind": "other",
-          "price": 95
-        },
-        {
-          "name": "Comtè",
-          "desc": "Lagrad fransk hårdost",
-          "kind": "other",
-          "price": 95
-        }
-      ],
+      "status": "none",
+      "dishes": [],
+      "note": "No menu published for today",
       "source": "https://www.menydags.se/restaurang/ruths/lunch"
     },
     "namu": {
@@ -453,8 +375,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Älg bourguignonne",
-          "desc": "Serveras med potatismos",
+          "name": "Oxfärsbiff",
+          "desc": "Stekt lök, stekt ägg, stekt potatis och gurka",
           "kind": "meat",
           "price": 175
         },
@@ -469,6 +391,18 @@
           "desc": "Spenat, svamp, zucchini och parmesan",
           "kind": "veg",
           "price": 195
+        },
+        {
+          "name": "Stekt falukorv",
+          "desc": "Stuvade makaroner & Stures ketchup",
+          "kind": "meat",
+          "price": 195
+        },
+        {
+          "name": "Isterband",
+          "desc": "Stuvad potatis, senap och rödbetor",
+          "kind": "meat",
+          "price": 245
         }
       ],
       "source": "https://www.menydags.se/restaurang/brasserie-sture-1912/lunch"
@@ -477,8 +411,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Mixed grill",
-          "desc": "Blandade grillrätter",
+          "name": "Grillad högrevsburgare",
+          "desc": "Pommes frites, barbecuesås, baconaioli",
           "kind": "meat"
         },
         {
@@ -671,15 +605,15 @@
           "price": 185
         },
         {
-          "name": "Wallenbergare",
-          "desc": "Skirat smör, potatispuré, gröna ärtor och lingon",
+          "name": "Kycklingfilé",
+          "desc": "Pommes, och chilimayonnaise",
           "kind": "meat",
           "price": 125
         },
         {
-          "name": "Torskrygg",
-          "desc": "Vitvinssås, potatispuré, citron och grönsaker",
-          "kind": "fish",
+          "name": "Havets wallenbergare",
+          "desc": "Potatispuré, brynt smör, ärtor, pepparrot",
+          "kind": "meat",
           "price": 145
         },
         {
@@ -695,15 +629,15 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Spaghetti Carbonara",
-          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
-          "kind": "meat",
+          "name": "Cannelloni",
+          "desc": "Gratinerade pastarullar, fyllda med ricotta och spenat",
+          "kind": "other",
           "price": 129
         },
         {
-          "name": "Pasta all´Arrabiata",
-          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
-          "kind": "other",
+          "name": "Pasta alle Vongole",
+          "desc": "Spaghetti med hjärtmusslor, gula körsbärstomater",
+          "kind": "fish",
           "price": 129
         },
         {
@@ -792,9 +726,19 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Gris",
-          "desc": "Pita, avokado, pico de gallo",
-          "kind": "meat"
+          "name": "Oxtartar",
+          "desc": "Pesto, fänkål, quinoa",
+          "kind": "other"
+        },
+        {
+          "name": "Gurka",
+          "desc": "Chili, sesam, ägg",
+          "kind": "veg"
+        },
+        {
+          "name": "Blomkål",
+          "desc": "Tomat, koriander, lime",
+          "kind": "veg"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
