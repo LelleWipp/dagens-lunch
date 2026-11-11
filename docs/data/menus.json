@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-10",
-  "updated_at": "2026-11-10T17:37:35+01:00",
+  "date": "2026-11-11",
+  "updated_at": "2026-11-11T17:39:24+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -281,19 +281,19 @@
       "dishes": [
         {
           "name": "Luques-oliver",
-          "desc": "Gröna oliver",
+          "desc": "Oliver",
           "kind": "other",
           "price": 85
         },
         {
           "name": "Saltrostade valenciamandlar",
-          "desc": "Rostade och saltade mandlar",
+          "desc": "Saltrostade mandlar",
           "kind": "other",
           "price": 55
         },
         {
           "name": "Ostron legris & xipister",
-          "desc": "Färska ostron med xipister",
+          "desc": "Färska ostron",
           "kind": "fish"
         },
         {
@@ -333,9 +333,9 @@
           "price": 165
         },
         {
-          "name": "Fransk majskyckling",
-          "desc": "Violinopumpa, grillad treviso & castellucciolinser",
-          "kind": "meat",
+          "name": "Munkasvinskotlett",
+          "desc": "Päron bakat med lardo, castellucciolinser & castelfranco",
+          "kind": "other",
           "price": 185
         },
         {
@@ -346,13 +346,13 @@
         },
         {
           "name": "Blodapelsinsemifreddo & pistagebrittle",
-          "desc": "Halvfrusen dessert med blodapelsin och pistage",
+          "desc": "Halvfryst dessert med blodapelsin och pistagekrisp",
           "kind": "other",
           "price": 125
         },
         {
-          "name": "Chokladkaka & vispad grädde",
-          "desc": "Klassisk chokladkaka med grädde",
+          "name": "Chokladkaka",
+          "desc": "Med vispad grädde",
           "kind": "other",
           "price": 95
         },
@@ -458,9 +458,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Kalvrullad i senapssås",
-          "desc": "Ärtor och potatismos",
-          "kind": "meat",
+          "name": "Kålpudding",
+          "desc": "Gräddsås och lingon",
+          "kind": "other",
           "price": 175
         },
         {
@@ -482,8 +482,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Grillat högrev",
-          "desc": "Potatispuré, rödvinssås, rökt sidfläsk, champinjoner, syltlök",
+          "name": "Kalvfärsbiff",
+          "desc": "Spetskål, rostad potatis, gräddsås",
           "kind": "meat"
         },
         {
@@ -676,16 +676,16 @@
           "price": 185
         },
         {
-          "name": "Pannbiff",
-          "desc": "Med lök, kokt potatis , lingon och skysås",
+          "name": "Havets wallenbergare",
+          "desc": "Potatispuré, brynt smör, ärtor, pepparrot",
           "kind": "meat",
-          "price": 125
+          "price": 145
         },
         {
-          "name": "Grillad laxfilé",
-          "desc": "Med kokt potatis, primörer och pepparrotssås",
-          "kind": "fish",
-          "price": 145
+          "name": "Ärtsoppa",
+          "desc": "Med pannkakor",
+          "kind": "other",
+          "price": 125
         },
         {
           "name": "Höstig risotto",
@@ -700,14 +700,14 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Spagetti Bolognese",
-          "desc": "Klassiker från Bologna med nötfärs",
-          "kind": "other",
+          "name": "Pasta all´Amatriciana",
+          "desc": "Färsk hemmagjord pasta med tomatsås, guanciale och pecorino-ost",
+          "kind": "meat",
           "price": 129
         },
         {
-          "name": "Pasta Pesto",
-          "desc": "Färsk hemmagjord pasta med pesto, mozzarella och körsbärstomat",
+          "name": "Pasta con Carciofi",
+          "desc": "Färsk hemmagjord pasta med kronärtskocka i ostsås av taleggio och parmesan",
           "kind": "veg",
           "price": 129
         },
@@ -803,8 +803,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Oxtartar",
-          "desc": "Rödlök, citron, jordärtskocka",
+          "name": "Grismacka",
+          "desc": "Surkål, saltgurka, persilja",
           "kind": "other"
         }
       ],
