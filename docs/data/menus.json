@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-11",
-  "updated_at": "2026-11-11T17:39:24+01:00",
+  "date": "2026-11-12",
+  "updated_at": "2026-11-12T18:08:08+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -281,19 +281,16 @@
       "dishes": [
         {
           "name": "Luques-oliver",
-          "desc": "Oliver",
           "kind": "other",
           "price": 85
         },
         {
           "name": "Saltrostade valenciamandlar",
-          "desc": "Saltrostade mandlar",
           "kind": "other",
           "price": 55
         },
         {
           "name": "Ostron legris & xipister",
-          "desc": "Färska ostron",
           "kind": "fish"
         },
         {
@@ -304,7 +301,6 @@
         },
         {
           "name": "Bayonneskinka",
-          "desc": "Fransk lufttorkad skinka",
           "kind": "meat",
           "price": 145
         },
@@ -316,7 +312,7 @@
         },
         {
           "name": "En burk sardeller",
-          "desc": "Serveras med smör på grillat bröd",
+          "desc": "Med smör på grillat bröd",
           "kind": "fish",
           "price": 125
         },
@@ -328,7 +324,6 @@
         },
         {
           "name": "Chorizo- & kastanjesoppa",
-          "desc": "Värmande soppa med chorizo och kastanjer",
           "kind": "meat",
           "price": 165
         },
@@ -339,27 +334,19 @@
           "price": 185
         },
         {
-          "name": "Torsk",
-          "desc": "Bräserad purjolök, potatis & salsa verde",
-          "kind": "fish",
-          "price": 275
-        },
-        {
           "name": "Blodapelsinsemifreddo & pistagebrittle",
-          "desc": "Halvfryst dessert med blodapelsin och pistagekrisp",
           "kind": "other",
           "price": 125
         },
         {
-          "name": "Chokladkaka",
-          "desc": "Med vispad grädde",
+          "name": "Chokladkaka & vispad grädde",
           "kind": "other",
           "price": 95
         },
         {
-          "name": "Comtè",
+          "name": "Comté",
           "desc": "Lagrad fransk hårdost",
-          "kind": "other",
+          "kind": "veg",
           "price": 95
         }
       ],
@@ -458,9 +445,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Kålpudding",
-          "desc": "Gräddsås och lingon",
-          "kind": "other",
+          "name": "Kycklingbröst",
+          "desc": "Salvia, bacon, parmesan och tomatsås",
+          "kind": "meat",
           "price": 175
         },
         {
@@ -482,9 +469,10 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Kalvfärsbiff",
-          "desc": "Spetskål, rostad potatis, gräddsås",
-          "kind": "meat"
+          "name": "Mixed Grill",
+          "desc": "Blandat grillat kött",
+          "kind": "meat",
+          "price": 145
         },
         {
           "name": "Pocherad kolja",
@@ -676,16 +664,16 @@
           "price": 185
         },
         {
+          "name": "Bistros egna köttbullar",
+          "desc": "Med potatispuré, gräddsås, lingon och pressgurka",
+          "kind": "meat",
+          "price": 125
+        },
+        {
           "name": "Havets wallenbergare",
           "desc": "Potatispuré, brynt smör, ärtor, pepparrot",
           "kind": "meat",
           "price": 145
-        },
-        {
-          "name": "Ärtsoppa",
-          "desc": "Med pannkakor",
-          "kind": "other",
-          "price": 125
         },
         {
           "name": "Höstig risotto",
@@ -700,15 +688,15 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Pasta all´Amatriciana",
-          "desc": "Färsk hemmagjord pasta med tomatsås, guanciale och pecorino-ost",
+          "name": "Spaghetti Carbonara",
+          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
           "kind": "meat",
           "price": 129
         },
         {
-          "name": "Pasta con Carciofi",
-          "desc": "Färsk hemmagjord pasta med kronärtskocka i ostsås av taleggio och parmesan",
-          "kind": "veg",
+          "name": "Pasta all´Arrabiata",
+          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
+          "kind": "other",
           "price": 129
         },
         {
@@ -803,9 +791,14 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Grismacka",
-          "desc": "Surkål, saltgurka, persilja",
+          "name": "Kålpudding",
+          "desc": "Lingon, radicchio, spetskål",
           "kind": "other"
+        },
+        {
+          "name": "Spetskål",
+          "desc": "Fänkål, basilika, orrichiette",
+          "kind": "veg"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
