@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-16",
-  "updated_at": "2026-11-16T19:57:36+01:00",
+  "date": "2026-11-17",
+  "updated_at": "2026-11-17T18:55:22+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -281,19 +281,18 @@
       "dishes": [
         {
           "name": "Luques-oliver",
-          "desc": "Gröna oliver",
+          "desc": "Gröna franska oliver",
           "kind": "other",
           "price": 85
         },
         {
           "name": "Saltrostade valenciamandlar",
-          "desc": "Mandlar",
+          "desc": "Mandlar rostade med salt",
           "kind": "other",
           "price": 55
         },
         {
           "name": "Ostron legris & xipister",
-          "desc": "Ostron",
           "kind": "fish"
         },
         {
@@ -303,10 +302,10 @@
           "price": 85
         },
         {
-          "name": "Bayonneskinka",
-          "desc": "Fransk lufttorkad skinka",
+          "name": "Fiocco di prosciutto",
+          "desc": "Italiensk lufttorkad skinka",
           "kind": "meat",
-          "price": 145
+          "price": 175
         },
         {
           "name": "Kycklingterrine",
@@ -322,37 +321,42 @@
         },
         {
           "name": "Escarole-sallad",
-          "desc": "Vinterrädisor, clementiner, dadlar, granatäpplevinaigrette, valnötter & ricotta salata",
+          "desc": "Päron, hasselnötter, senapsvinaigrette & comtè",
           "kind": "other",
           "price": 165
         },
         {
           "name": "Chorizo- & kastanjesoppa",
-          "desc": "Varm soppa med chorizo och kastanjer",
+          "desc": "Värmande soppa med chorizo och kastanjer",
           "kind": "meat",
           "price": 165
         },
         {
-          "name": "Munkasvinsporchetta",
-          "desc": "Marinerad paprika, & castellucciolinser",
+          "name": "Grillat munkasvin",
+          "desc": "Savoykål, violinopumpa, plommon & salvia",
           "kind": "other",
           "price": 185
         },
         {
-          "name": "Torsk",
-          "desc": "Potatis, bräserad purjolök & kronärtskocka-salsa verde",
-          "kind": "fish",
-          "price": 275
+          "name": "Gratinerad brandade",
+          "desc": "Serveras med bräserad purjolök",
+          "kind": "other",
+          "price": 185
         },
         {
           "name": "Blodapelsinsemifreddo & pistagebrittle",
-          "desc": "Italiensk glasstårta",
           "kind": "other",
           "price": 125
         },
         {
-          "name": "Chokladkaka & vispad grädde",
-          "desc": "Klassisk efterrätt",
+          "name": "Plommon- & mandeltarte",
+          "desc": "Serveras med crème fraîche",
+          "kind": "other",
+          "price": 95
+        },
+        {
+          "name": "Chokladkaka",
+          "desc": "Vispad grädde",
           "kind": "other",
           "price": 95
         },
@@ -366,9 +370,38 @@
       "source": "https://www.menydags.se/restaurang/ruths/lunch"
     },
     "namu": {
-      "status": "none",
-      "dishes": [],
-      "note": "No menu published for today",
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Gua Bao",
+          "desc": "Två hembakade ångade bröd, grillat sidfläsk från Eslöv, hoisin, Namu hotsauce, gurka och koriander. Serveras med en sallad på sesam, yuzu & grönt äpple",
+          "kind": "meat",
+          "price": 190
+        },
+        {
+          "name": "Veckans special",
+          "desc": "Sotad ASC-Lax från Färöarna, marinerad 24h i misozuke, smörsås, vitlök, ångad pakchoy, ris från Italien",
+          "kind": "fish",
+          "price": 179
+        },
+        {
+          "name": "Bibimbap med kyckling eller tofu",
+          "desc": "Bulgogi-kycklinglår eller friterad tofu från Marieholm, ris från Italien, picklade & marinerade grönsaker, Namu´s kimchi, Hyllehög - ägg 63°, bibimbapsås. -Äts bäst med sked",
+          "kind": "other"
+        },
+        {
+          "name": "Namulunch 3-rätters",
+          "desc": "Trerätters lunch; förrätt, varmrätt & dessert komponerat av vårt kök",
+          "kind": "other",
+          "price": 455
+        },
+        {
+          "name": "Ramyun",
+          "desc": "Buljong på rostad kyckling, färska nudlar från Nordic Noodles, Namu´s chiliolja, högrev med chili, knarkägg, grönt. (Lätt och ren \"shio style buljong\" utan MSG -Vi rekommenderar kimchi till",
+          "kind": "meat",
+          "price": 199
+        }
+      ],
       "source": "https://www.menydags.se/restaurang/namu/lunch"
     },
     "mjs": {
@@ -429,8 +462,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Bakad högrev",
-          "desc": "Chili, paprika, bönor och crème fraiche",
+          "name": "Älgfärsbiff",
+          "desc": "Rostad selleri, enbärssås och lingon",
           "kind": "meat",
           "price": 175
         },
@@ -465,8 +498,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Grillad kycklingfilé",
-          "desc": "Basmatiris, garam masala, grillade grönsaker",
+          "name": "Fläskschnitzel",
+          "desc": "Potatis, haricots verts, ndujasmör, rödvinssås",
           "kind": "meat"
         },
         {
@@ -659,14 +692,14 @@
           "price": 185
         },
         {
-          "name": "Fläskschnitzel",
-          "desc": "Pommes, citron, kapris, ansjovis och skysås",
+          "name": "Köttfärslimpa",
+          "desc": "Ugnsbakad potatis, gräddsås, lingon och pressgurka",
           "kind": "meat",
           "price": 125
         },
         {
-          "name": "Sejfilé",
-          "desc": "Vitvinssås, kokt potatis, citron och grönsaker",
+          "name": "Panerad sejfilé",
+          "desc": "Potatispuré, citron och remouladsås",
           "kind": "fish",
           "price": 145
         },
@@ -683,14 +716,14 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Lasagne bolognese tradizionale",
-          "desc": "Klassisk italiensk lasagne med köttfärssås enligt traditionellt recept från Bologna",
-          "kind": "meat",
+          "name": "Spagetti Bolognese",
+          "desc": "Klassiker från Bologna med nötfärs",
+          "kind": "other",
           "price": 129
         },
         {
-          "name": "Pasta con porcini",
-          "desc": "Färsk hemmagjord pasta med karljohansvamp, tryffel och parmesansås",
+          "name": "Pasta Pesto",
+          "desc": "Färsk hemmagjord pasta med pesto, mozzarella och körsbärstomat",
           "kind": "veg",
           "price": 129
         },
@@ -786,9 +819,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Gris",
-          "desc": "Curry, gurka, sesam",
-          "kind": "meat"
+          "name": "Oxtartar",
+          "desc": "Grönkål, pumpa, dukkha",
+          "kind": "other"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
