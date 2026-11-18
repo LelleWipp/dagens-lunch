@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-17",
-  "updated_at": "2026-11-17T18:55:22+01:00",
+  "date": "2026-11-18",
+  "updated_at": "2026-11-18T18:37:54+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -281,13 +281,11 @@
       "dishes": [
         {
           "name": "Luques-oliver",
-          "desc": "Gröna franska oliver",
           "kind": "other",
           "price": 85
         },
         {
           "name": "Saltrostade valenciamandlar",
-          "desc": "Mandlar rostade med salt",
           "kind": "other",
           "price": 55
         },
@@ -314,8 +312,8 @@
           "price": 155
         },
         {
-          "name": "En burk sardeller med smör",
-          "desc": "Serveras på grillat bröd",
+          "name": "En burk sardeller",
+          "desc": "Serveras med smör på grillat bröd",
           "kind": "fish",
           "price": 125
         },
@@ -327,7 +325,6 @@
         },
         {
           "name": "Chorizo- & kastanjesoppa",
-          "desc": "Värmande soppa med chorizo och kastanjer",
           "kind": "meat",
           "price": 165
         },
@@ -338,8 +335,7 @@
           "price": 185
         },
         {
-          "name": "Gratinerad brandade",
-          "desc": "Serveras med bräserad purjolök",
+          "name": "Gratinerad brandade & bräserad purjolök",
           "kind": "other",
           "price": 185
         },
@@ -356,7 +352,7 @@
         },
         {
           "name": "Chokladkaka",
-          "desc": "Vispad grädde",
+          "desc": "Med vispad grädde",
           "kind": "other",
           "price": 95
         },
@@ -462,8 +458,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Älgfärsbiff",
-          "desc": "Rostad selleri, enbärssås och lingon",
+          "name": "Kalkonbröst",
+          "desc": "Rosmarinsås, svartkål och klyftpotatis",
           "kind": "meat",
           "price": 175
         },
@@ -498,8 +494,8 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Fläskschnitzel",
-          "desc": "Potatis, haricots verts, ndujasmör, rödvinssås",
+          "name": "Wallenbergare",
+          "desc": "Potatispuré, rårörda lingon, brynt smör, lökfrästa ärtor",
           "kind": "meat"
         },
         {
@@ -692,15 +688,15 @@
           "price": 185
         },
         {
-          "name": "Köttfärslimpa",
-          "desc": "Ugnsbakad potatis, gräddsås, lingon och pressgurka",
+          "name": "Stekt fläsk",
+          "desc": "Raggmunk och rårörda lingon",
           "kind": "meat",
           "price": 125
         },
         {
-          "name": "Panerad sejfilé",
-          "desc": "Potatispuré, citron och remouladsås",
-          "kind": "fish",
+          "name": "Havets wallenbergare",
+          "desc": "Potatispuré, brynt smör, ärtor, pepparrot",
+          "kind": "meat",
           "price": 145
         },
         {
@@ -716,14 +712,14 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Spagetti Bolognese",
-          "desc": "Klassiker från Bologna med nötfärs",
-          "kind": "other",
+          "name": "Pasta all´Amatriciana",
+          "desc": "Färsk hemmagjord pasta med tomatsås, guanciale och pecorino-ost",
+          "kind": "meat",
           "price": 129
         },
         {
-          "name": "Pasta Pesto",
-          "desc": "Färsk hemmagjord pasta med pesto, mozzarella och körsbärstomat",
+          "name": "Pasta con Carciofi",
+          "desc": "Färsk hemmagjord pasta med kronärtskocka i ostsås av taleggio och parmesan",
           "kind": "veg",
           "price": 129
         },
@@ -819,9 +815,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Oxtartar",
-          "desc": "Grönkål, pumpa, dukkha",
-          "kind": "other"
+          "name": "Köttfärslimpa",
+          "desc": "Rotselleri, selleri, oliver",
+          "kind": "meat"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
