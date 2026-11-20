@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-19",
-  "updated_at": "2026-11-19T18:43:20+01:00",
+  "date": "2026-11-20",
+  "updated_at": "2026-11-20T18:21:10+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -312,7 +312,7 @@
         },
         {
           "name": "En burk sardeller",
-          "desc": "Serveras med smör på grillat bröd",
+          "desc": "Med smör på grillat bröd",
           "kind": "fish",
           "price": 125
         },
@@ -340,18 +340,11 @@
         },
         {
           "name": "Hallonsemifreddo & pistagebrittle",
-          "kind": "veg",
+          "kind": "other",
           "price": 125
         },
         {
-          "name": "Kvitten- & mandeltarte",
-          "desc": "Crème fraîche",
-          "kind": "other",
-          "price": 95
-        },
-        {
-          "name": "Chokladkaka",
-          "desc": "Vispad grädde",
+          "name": "Chokladkaka & vispad grädde",
           "kind": "other",
           "price": 95
         },
@@ -457,9 +450,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Rimmad kalvbringa",
-          "desc": "Pepparrotssås, morötter och ärtor",
-          "kind": "meat",
+          "name": "Grillad pluma",
+          "desc": "Sherrysås, tomat, oliver och potatismos",
+          "kind": "other",
           "price": 175
         },
         {
@@ -493,9 +486,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Mixed Grill",
-          "kind": "meat",
-          "price": 145
+          "name": "Grillad hanger steak",
+          "desc": "Pommes frites, grönpepparsås, bakad tomat, schalottenlök",
+          "kind": "meat"
         },
         {
           "name": "Halstrad kummelfilé",
@@ -687,8 +680,8 @@
           "price": 185
         },
         {
-          "name": "Kalvfärsbiffar",
-          "desc": "Kantarellsås, lingon, pressgurka och rostad potatis",
+          "name": "Kycklingfilé",
+          "desc": "Currysås, morot och basmatiris",
           "kind": "meat",
           "price": 125
         },
@@ -711,15 +704,15 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Spaghetti Carbonara",
-          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
-          "kind": "meat",
+          "name": "Cannelloni",
+          "desc": "Gratinerade pastarullar, fyllda med ricotta och spenat",
+          "kind": "other",
           "price": 129
         },
         {
-          "name": "Pasta all´Arrabiata",
-          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
-          "kind": "other",
+          "name": "Pasta alle Vongole",
+          "desc": "Spaghetti med hjärtmusslor, gula körsbärstomater",
+          "kind": "fish",
           "price": 129
         },
         {
@@ -814,9 +807,19 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Gravlax",
-          "desc": "Rågbröd, senapsås, dill",
-          "kind": "fish"
+          "name": "Slaktarbiff",
+          "desc": "Bakadpotatis, cafe de paris",
+          "kind": "meat"
+        },
+        {
+          "name": "Majs",
+          "desc": "Rödlök, chili, avokado",
+          "kind": "veg"
+        },
+        {
+          "name": "Spenat",
+          "desc": "Filo, feta, granatäpple",
+          "kind": "veg"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
