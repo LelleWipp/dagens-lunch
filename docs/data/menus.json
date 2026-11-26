@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-25",
-  "updated_at": "2026-11-25T19:51:22+01:00",
+  "date": "2026-11-26",
+  "updated_at": "2026-11-26T19:39:58+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -366,47 +366,17 @@
       "source": "https://www.menydags.se/restaurang/mjs/lunch"
     },
     "sture": {
-      "status": "today",
-      "dishes": [
-        {
-          "name": "Majskyckling",
-          "desc": "Gräddsås, gelé och ärtor",
-          "kind": "meat",
-          "price": 175
-        },
-        {
-          "name": "Torsk",
-          "desc": "Paprika, tomat, räkor och aioli",
-          "kind": "fish",
-          "price": 285
-        },
-        {
-          "name": "Broccolisoppa och smörgås",
-          "desc": "Serveras med svampcrème",
-          "kind": "veg",
-          "price": 195
-        },
-        {
-          "name": "Stekt falukorv",
-          "desc": "Stuvade makaroner & Stures ketchup",
-          "kind": "meat",
-          "price": 195
-        },
-        {
-          "name": "Isterband",
-          "desc": "Stuvad potatis, senap och rödbetor",
-          "kind": "meat",
-          "price": 245
-        }
-      ],
+      "status": "none",
+      "dishes": [],
+      "note": "No menu published for today",
       "source": "https://www.menydags.se/restaurang/brasserie-sture-1912/lunch"
     },
     "kol": {
       "status": "today",
       "dishes": [
         {
-          "name": "Oxfärsbiff",
-          "desc": "rostade rotfrukter, tzatziki, grillad paprika, fetaost",
+          "name": "Mixed grill",
+          "desc": "Grillad kötträtt",
           "kind": "meat"
         },
         {
@@ -599,14 +569,14 @@
           "price": 185
         },
         {
-          "name": "Wallenbergare",
-          "desc": "Skirat smör, potatispuré, gröna ärtor och lingon",
+          "name": "Biff à la Lindström",
+          "desc": "Kokt potatis, inlagd gurka och skysås",
           "kind": "meat",
           "price": 125
         },
         {
-          "name": "Stekt koljafilé",
-          "desc": "Potatispuré, grönsaker, vitvinssås och citron",
+          "name": "Grillad tonfisk",
+          "desc": "Risotto, ruccola, citron och aioli",
           "kind": "fish",
           "price": 145
         },
@@ -623,15 +593,15 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Pasta all´Amatriciana",
-          "desc": "Färsk hemmagjord pasta med tomatsås, guanciale och pecorino-ost",
+          "name": "Spaghetti Carbonara",
+          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
           "kind": "meat",
           "price": 129
         },
         {
-          "name": "Pasta con Carciofi",
-          "desc": "Färsk hemmagjord pasta med kronärtskocka i ostsås av taleggio och parmesan",
-          "kind": "veg",
+          "name": "Pasta all´Arrabiata",
+          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
+          "kind": "other",
           "price": 129
         },
         {
@@ -726,9 +696,9 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Fläskarré",
-          "desc": "Paprika / Nduja / Persilja",
-          "kind": "meat"
+          "name": "Tupp",
+          "desc": "Aubergine / Chipotle / Kakao",
+          "kind": "other"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
