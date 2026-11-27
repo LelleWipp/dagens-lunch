@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-26",
-  "updated_at": "2026-11-26T19:39:58+01:00",
+  "date": "2026-11-27",
+  "updated_at": "2026-11-27T19:29:59+01:00",
   "office": {
     "name": "Consid",
     "address": "Stortorget 29, Malmö",
@@ -366,17 +366,53 @@
       "source": "https://www.menydags.se/restaurang/mjs/lunch"
     },
     "sture": {
-      "status": "none",
-      "dishes": [],
-      "note": "No menu published for today",
+      "status": "today",
+      "dishes": [
+        {
+          "name": "Stekt fläsk",
+          "desc": "Löksås",
+          "kind": "meat",
+          "price": 175
+        },
+        {
+          "name": "Kalvhögrev",
+          "desc": "Rostade grönsaker och Bearnaisesås",
+          "kind": "meat",
+          "price": 175
+        },
+        {
+          "name": "Torsk",
+          "desc": "Paprika, tomat, räkor och aioli",
+          "kind": "fish",
+          "price": 285
+        },
+        {
+          "name": "Broccolisoppa och smörgås",
+          "desc": "Serveras med svampcrème",
+          "kind": "veg",
+          "price": 195
+        },
+        {
+          "name": "Stekt falukorv",
+          "desc": "Stuvade makaroner & Stures ketchup",
+          "kind": "meat",
+          "price": 195
+        },
+        {
+          "name": "Isterband",
+          "desc": "Stuvad potatis, senap och rödbetor",
+          "kind": "meat",
+          "price": 245
+        }
+      ],
       "source": "https://www.menydags.se/restaurang/brasserie-sture-1912/lunch"
     },
     "kol": {
       "status": "today",
       "dishes": [
         {
-          "name": "Mixed grill",
-          "desc": "Grillad kötträtt",
+          "name": "Grillad ryggbiff",
+          "desc": "potatispuré, bacon, rödvinssås, brynt lök, ört- & vitlökssmör",
           "kind": "meat"
         },
         {
@@ -569,14 +605,14 @@
           "price": 185
         },
         {
-          "name": "Biff à la Lindström",
-          "desc": "Kokt potatis, inlagd gurka och skysås",
+          "name": "Kycklingschnitzel",
+          "desc": "Örtsmör, skysås, ärter och pommes",
           "kind": "meat",
           "price": 125
         },
         {
-          "name": "Grillad tonfisk",
-          "desc": "Risotto, ruccola, citron och aioli",
+          "name": "Panerad spättafilé",
+          "desc": "Potatispuré, citron och remouladsås",
           "kind": "fish",
           "price": 145
         },
@@ -593,15 +629,15 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Spaghetti Carbonara",
-          "desc": "Klassiker från Rom med guanciale, pecorino-ost och ägg",
-          "kind": "meat",
+          "name": "Cannelloni",
+          "desc": "Gratinerade pastarullar, fyllda med ricotta och spenat",
+          "kind": "other",
           "price": 129
         },
         {
-          "name": "Pasta all´Arrabiata",
-          "desc": "Färsk hemmagjord pasta med tomatsås, vitlök, chili och olivolja",
-          "kind": "other",
+          "name": "Pasta alle Vongole",
+          "desc": "Spaghetti med hjärtmusslor, gula körsbärstomater",
+          "kind": "fish",
           "price": 129
         },
         {
@@ -696,9 +732,19 @@
       "status": "today",
       "dishes": [
         {
-          "name": "Tupp",
-          "desc": "Aubergine / Chipotle / Kakao",
+          "name": "Oxtartar",
+          "desc": "Tomat / Parmesan / Risoni",
           "kind": "other"
+        },
+        {
+          "name": "Broccoli",
+          "desc": "Parmesan / Citron / Dijon",
+          "kind": "veg"
+        },
+        {
+          "name": "Spetskål",
+          "desc": "Valnöt / Bryntsmör / Körvel",
+          "kind": "veg"
         }
       ],
       "source": "https://www.menydags.se/restaurang/saltimporten-canteen/lunch"
